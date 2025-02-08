@@ -2,15 +2,15 @@ import 'package:emtelek/shared/models/add-ads-models/ad_model.dart';
 
 class PropertyAdModel {
   AdModel adModel;
-  double totalArea;
+  double? totalArea;
   double? netOrBuildingArea;
   int? romeCount;
   int? bathroomCount;
   int? floorCount;
-  int? roomNumber;
+  int? floorNumber;
   int? balconyCount;
-  String? constructionDate;
-  bool furnished; //If we add to the land, this means that it contains trees
+  DateTime? constructionDate;
+  bool? furnished; //If we add to the land, this means that it contains trees
   String? complexName;
 
   PropertyAdModel({
@@ -20,7 +20,7 @@ class PropertyAdModel {
     this.romeCount,
     this.bathroomCount,
     this.floorCount,
-    this.roomNumber,
+    this.floorNumber,
     this.balconyCount,
     this.constructionDate,
     this.furnished = false,
@@ -35,7 +35,7 @@ class PropertyAdModel {
       romeCount: json["romeCount"],
       bathroomCount: json["bathroomCount"],
       floorCount: json["floorCount"],
-      roomNumber: json["roomNumber"],
+      floorNumber: json["floorNumber"],
       balconyCount: json["balconyCount"],
       constructionDate: json["constructionDate"],
       furnished: json["furnished"],
@@ -50,7 +50,7 @@ class PropertyAdModel {
         "romeCount": romeCount,
         "bathroomCount": bathroomCount,
         "floorCount": floorCount,
-        "roomNumber": roomNumber,
+        "floorNumber": floorNumber,
         "balconyCount": balconyCount,
         "constructionDate": constructionDate,
         "furnished": furnished,
@@ -66,7 +66,7 @@ class PropertyAdModel {
         'romeCount: $romeCount, '
         'bathroomCount: $bathroomCount, '
         'floorCount: $floorCount, '
-        'roomNumber: $roomNumber, '
+        'floorNumber: $floorNumber, '
         'balconyCount: $balconyCount, '
         'constructionDate: $constructionDate, '
         'furnished: $furnished, '

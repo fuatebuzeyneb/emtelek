@@ -1,4 +1,7 @@
 {
+    "Close": "Close",
+    "Select": "Select",
+    "SelectDate": "Select Date",
     "ForSale": "for sale",
     "ForRent": "for rent",
     "CreateNewAccount": "Create New Account",
@@ -113,6 +116,7 @@
     "AdDescriptionOptional": "Ad Description (Optional)",
     "NumberOfRooms": "Number of Rooms",
     "FloorNumberOptional": "Floor Number (Optional)",
+    "FloorCountOptional": "Floor Count (Optional)",
     "NumberOfBalconiesOptional": "Number of Balconies (Optional)",
     "ConstructionDateOptional": "Construction Date (Optional)",
     "FurnishedOptional": "Furnished (Optional)",

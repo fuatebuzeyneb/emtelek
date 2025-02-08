@@ -1,4 +1,7 @@
 {
+    "Close": "Kapat",
+    "Select": "Seç",
+    "SelectDate": "Tarih Seçin",
     "ForSale": "Satılık",
     "ForRent": "Kiralık",
     "CreateNewAccount": "Yeni Hesap Oluştur",
@@ -113,6 +116,7 @@
     "AdDescriptionOptional": "İlan Açıklaması (Opsiyonel)",
     "NumberOfRooms": "Oda Sayısı",
     "FloorNumberOptional": "Kat Numarası (Opsiyonel)",
+    "FloorCountOptional": "Kat Sayısı (Opsiyonel)",
     "NumberOfBalconiesOptional": "Balkon Sayısı (Opsiyonel)",
     "ConstructionDateOptional": "Yapım Tarihi (Opsiyonel)",
     "FurnishedOptional": "Eşyalı (Opsiyonel)",

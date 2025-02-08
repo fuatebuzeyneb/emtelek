@@ -65,6 +65,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "ChooseTheRightCategory": MessageLookupByLibrary.simpleMessage(
             "Şimdi, ilanınız için uygun kategoriyi seçin:"),
         "City": MessageLookupByLibrary.simpleMessage("Şehir"),
+        "Close": MessageLookupByLibrary.simpleMessage("Kapat"),
         "ConstructionDateOptional":
             MessageLookupByLibrary.simpleMessage("Yapım Tarihi (Opsiyonel)"),
         "ContactUs": MessageLookupByLibrary.simpleMessage("Bize Ulaşın"),
@@ -96,6 +97,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "FindOffice":
             MessageLookupByLibrary.simpleMessage("Ofisinizi Burada Bulun"),
         "FirstName": MessageLookupByLibrary.simpleMessage("Ad"),
+        "FloorCountOptional":
+            MessageLookupByLibrary.simpleMessage("Kat Sayısı (Opsiyonel)"),
         "FloorNumberOptional":
             MessageLookupByLibrary.simpleMessage("Kat Numarası (Opsiyonel)"),
         "ForRent": MessageLookupByLibrary.simpleMessage("Kiralık"),
@@ -172,10 +175,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "Sale": MessageLookupByLibrary.simpleMessage("Satılık"),
         "SearchFilters":
             MessageLookupByLibrary.simpleMessage("Arama Filtreleri"),
+        "Select": MessageLookupByLibrary.simpleMessage("Seç"),
         "SelectCityOrRegion": MessageLookupByLibrary.simpleMessage(
             "Emlak aramak istediğiniz şehirleri veya bölgeleri seçin"),
         "SelectCurrency":
             MessageLookupByLibrary.simpleMessage("Para Birimi Seçin"),
+        "SelectDate": MessageLookupByLibrary.simpleMessage("Tarih Seçin"),
         "SelectLanguage": MessageLookupByLibrary.simpleMessage("Dil Seçin"),
         "Shop": MessageLookupByLibrary.simpleMessage("Dükkan"),
         "SignInAndPost":

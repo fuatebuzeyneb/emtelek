@@ -50,6 +50,36 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `Close`
+  String get Close {
+    return Intl.message(
+      'Close',
+      name: 'Close',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select`
+  String get Select {
+    return Intl.message(
+      'Select',
+      name: 'Select',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Date`
+  String get SelectDate {
+    return Intl.message(
+      'Select Date',
+      name: 'SelectDate',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `for sale`
   String get ForSale {
     return Intl.message(
@@ -1187,6 +1217,16 @@ class S {
     return Intl.message(
       'Floor Number (Optional)',
       name: 'FloorNumberOptional',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Floor Count (Optional)`
+  String get FloorCountOptional {
+    return Intl.message(
+      'Floor Count (Optional)',
+      name: 'FloorCountOptional',
       desc: '',
       args: [],
     );

@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:bloc/bloc.dart';
 import 'package:emtelek/features/add_listing/data/models/property_add_model.dart';
 import 'package:emtelek/shared/models/add-ads-models/ad_model.dart';
+import 'package:emtelek/shared/models/district-model/district_model.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:meta/meta.dart';
 
@@ -15,37 +16,45 @@ class PropertyAddAdCubit extends Cubit<PropertyAddAdState> {
 // 5--> Property for rent
   int? categoryForAdType;
 
-  changeCategoryForAdType(int type) {
+  void changeCategoryForAdType(int type) {
     categoryForAdType = type;
     emit(PropertyAddAdInitial());
   }
 
+  int? cityId;
+  List<DistrictModel> filteredDistricts = [];
+  void selectCityId(int id) {
+    cityId = id;
+
+    emit(PropertyAddAdInitial());
+  }
+
   PropertyAdModel propertyAdModel = PropertyAdModel(
-      totalArea: 0,
-      netOrBuildingArea: 0,
-      romeCount: 0,
-      bathroomCount: 0,
-      floorCount: 0,
-      roomNumber: 0,
-      balconyCount: 0,
-      constructionDate: '',
-      furnished: true,
-      complexName: '',
+      totalArea: null,
+      netOrBuildingArea: null,
+      romeCount: null,
+      bathroomCount: null,
+      floorCount: null,
+      floorNumber: null,
+      balconyCount: null,
+      constructionDate: null,
+      furnished: null,
+      complexName: null,
       adModel: AdModel(
-        title: '',
-        price: 0,
-        location: LatLng(0, 0),
-        image: '',
-        description: '',
-        phone: '',
-        currency: '',
-        email: '',
-        districtId: 0,
+        title: null,
+        price: null,
+        location: null,
+        image: null,
+        description: null,
+        phone: null,
+        currency: null,
+        email: null,
+        districtId: null,
         clientId: 0,
-        sellerType: 0,
-        categoryId: 0,
+        sellerType: null,
+        categoryId: null,
         token: '',
-        address: '',
+        address: null,
       ));
 
   void setPropertyField(String field, dynamic value) {
@@ -59,8 +68,8 @@ class PropertyAddAdCubit extends Cubit<PropertyAddAdState> {
       propertyAdModel.bathroomCount = value;
     } else if (field == 'floorCount') {
       propertyAdModel.floorCount = value;
-    } else if (field == 'roomNumber') {
-      propertyAdModel.roomNumber = value;
+    } else if (field == 'floorNumber') {
+      propertyAdModel.floorNumber = value;
     } else if (field == 'balconyCount') {
       propertyAdModel.balconyCount = value;
     } else if (field == 'constructionDate') {
@@ -99,7 +108,7 @@ class PropertyAddAdCubit extends Cubit<PropertyAddAdState> {
       propertyAdModel.adModel.token = value;
     }
 
-    // emit(PropertyUpdated(propertyAdModel)); // إرسال الحالة الجديدة
+    emit(PropertyAddAdInitial()); // إرسال الحالة الجديدة
   }
 
   void submitProperty() {

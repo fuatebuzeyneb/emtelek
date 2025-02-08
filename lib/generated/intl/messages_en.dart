@@ -66,6 +66,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "ChooseTheRightCategory": MessageLookupByLibrary.simpleMessage(
             "Now, choose the appropriate category for your ad:"),
         "City": MessageLookupByLibrary.simpleMessage("City"),
+        "Close": MessageLookupByLibrary.simpleMessage("Close"),
         "ConstructionDateOptional": MessageLookupByLibrary.simpleMessage(
             "Construction Date (Optional)"),
         "ContactUs": MessageLookupByLibrary.simpleMessage("Contact Us"),
@@ -94,6 +95,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "FindOffice":
             MessageLookupByLibrary.simpleMessage("Find Your Office Here"),
         "FirstName": MessageLookupByLibrary.simpleMessage("First Name"),
+        "FloorCountOptional":
+            MessageLookupByLibrary.simpleMessage("Floor Count (Optional)"),
         "FloorNumberOptional":
             MessageLookupByLibrary.simpleMessage("Floor Number (Optional)"),
         "ForRent": MessageLookupByLibrary.simpleMessage("for rent"),
@@ -169,10 +172,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "Room": MessageLookupByLibrary.simpleMessage("Room"),
         "Sale": MessageLookupByLibrary.simpleMessage("Sale"),
         "SearchFilters": MessageLookupByLibrary.simpleMessage("Search Filters"),
+        "Select": MessageLookupByLibrary.simpleMessage("Select"),
         "SelectCityOrRegion": MessageLookupByLibrary.simpleMessage(
             "Select the cities or regions you want to search for property in"),
         "SelectCurrency":
             MessageLookupByLibrary.simpleMessage("Select Currency"),
+        "SelectDate": MessageLookupByLibrary.simpleMessage("Select Date"),
         "SelectLanguage":
             MessageLookupByLibrary.simpleMessage("Select Language"),
         "Shop": MessageLookupByLibrary.simpleMessage("Shop"),

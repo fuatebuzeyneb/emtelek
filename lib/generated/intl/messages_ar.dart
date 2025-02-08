@@ -66,6 +66,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "ChooseTheRightCategory": MessageLookupByLibrary.simpleMessage(
             "الأن, اختر الفئة المناسبة لاعلانك:"),
         "City": MessageLookupByLibrary.simpleMessage("المدينة"),
+        "Close": MessageLookupByLibrary.simpleMessage("اغلاق"),
         "ConstructionDateOptional":
             MessageLookupByLibrary.simpleMessage("تاريخ البناء (اختياري)"),
         "ContactUs": MessageLookupByLibrary.simpleMessage("اتصل بنا"),
@@ -93,13 +94,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "FindLand": MessageLookupByLibrary.simpleMessage("ابحث عن أرضك هنا"),
         "FindOffice": MessageLookupByLibrary.simpleMessage("ابحث عن مكتبك هنا"),
         "FirstName": MessageLookupByLibrary.simpleMessage("الاسم الاول"),
+        "FloorCountOptional":
+            MessageLookupByLibrary.simpleMessage("عدد الطوابق (اختياري)"),
         "FloorNumberOptional":
             MessageLookupByLibrary.simpleMessage("رقم الطابق (اختياري)"),
         "ForRent": MessageLookupByLibrary.simpleMessage("للايجار"),
         "ForSale": MessageLookupByLibrary.simpleMessage("للبيع"),
         "ForgotPassword":
             MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور"),
-        "Furnished": MessageLookupByLibrary.simpleMessage("مفروشة"),
+        "Furnished": MessageLookupByLibrary.simpleMessage("مفروش"),
         "FurnishedOptional":
             MessageLookupByLibrary.simpleMessage("مفروش (اختياري)"),
         "FurnishedOrUnfurnished":
@@ -166,9 +169,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "Room": MessageLookupByLibrary.simpleMessage("غرفة"),
         "Sale": MessageLookupByLibrary.simpleMessage("بيع"),
         "SearchFilters": MessageLookupByLibrary.simpleMessage("فلاتر البحث"),
+        "Select": MessageLookupByLibrary.simpleMessage("اختر"),
         "SelectCityOrRegion": MessageLookupByLibrary.simpleMessage(
             "اختر المدن او المناطق التي تريد البحث عن عقار فيها"),
         "SelectCurrency": MessageLookupByLibrary.simpleMessage("اختر العملة"),
+        "SelectDate": MessageLookupByLibrary.simpleMessage("اختر التاريخ"),
         "SelectLanguage": MessageLookupByLibrary.simpleMessage("اختر اللغة"),
         "Shop": MessageLookupByLibrary.simpleMessage("محل"),
         "SignInAndPost": MessageLookupByLibrary.simpleMessage(
@@ -192,7 +197,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Type": MessageLookupByLibrary.simpleMessage("نوع"),
         "USD": MessageLookupByLibrary.simpleMessage("الدولار الأمريكي"),
         "USDollar": MessageLookupByLibrary.simpleMessage("الدولار الأمريكي"),
-        "Unfurnished": MessageLookupByLibrary.simpleMessage("غير مفروشة"),
+        "Unfurnished": MessageLookupByLibrary.simpleMessage("غير مفروش"),
         "Vehicles": MessageLookupByLibrary.simpleMessage("مركبات"),
         "ViewAll": MessageLookupByLibrary.simpleMessage("عرض الكل"),
         "Villa": MessageLookupByLibrary.simpleMessage("فيلا"),

@@ -1,9 +1,11 @@
 import 'package:emtelek/core/constants/app_colors.dart';
 import 'package:emtelek/core/extensions/media_query_extensions.dart';
+import 'package:emtelek/features/add_listing/domain/cubit/property_add_ad_cubit.dart';
 import 'package:emtelek/shared/services/cache_hekper.dart';
 import 'package:emtelek/shared/services/service_locator.dart';
 import 'package:emtelek/shared/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:http/http.dart' as http;
@@ -74,6 +76,8 @@ class _SelectLocationState extends State<SelectLocation> {
 
   @override
   Widget build(BuildContext context) {
+    PropertyAddAdCubit propertyAddAdCubit =
+        BlocProvider.of<PropertyAddAdCubit>(context);
     return Scaffold(
       appBar: AppBar(
         shadowColor: Colors.white,
@@ -212,6 +216,9 @@ class _SelectLocationState extends State<SelectLocation> {
         backgroundColor: Colors.white,
         onPressed: () {
           if (selectedLocation != null) {
+            propertyAddAdCubit.setPropertyField(
+                'adModelLocation', selectedLocation!);
+            print(selectedLocation);
             Navigator.pop(context, selectedLocation);
           } else {
             ScaffoldMessenger.of(context).showSnackBar(

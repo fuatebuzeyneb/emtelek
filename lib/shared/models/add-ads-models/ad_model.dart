@@ -1,19 +1,19 @@
 import 'package:latlong2/latlong.dart';
 
 class AdModel {
-  String title;
-  String description;
-  double price;
-  String phone;
-  String currency;
-  String email;
-  String image;
-  LatLng location;
-  int districtId;
-  String address;
+  String? title;
+  String? description;
+  double? price;
+  String? phone;
+  String? currency;
+  String? email;
+  String? image;
+  LatLng? location;
+  int? districtId;
+  String? address;
   int clientId;
-  int sellerType;
-  int categoryId;
+  int? sellerType;
+  int? categoryId;
   String token;
 
   AdModel(
