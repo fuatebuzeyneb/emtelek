@@ -9,12 +9,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class DistrictSelectionAlertDialog extends StatelessWidget {
   const DistrictSelectionAlertDialog({
     super.key,
+    required this.forWitchType,
   });
 
+  final int forWitchType; //if 1 for property if 2 for car
   @override
   Widget build(BuildContext context) {
     PropertyAddAdCubit propertyAddAdCubit =
         BlocProvider.of<PropertyAddAdCubit>(context);
+    SettingsCubit settingsCubit = BlocProvider.of<SettingsCubit>(context);
     // SettingsCubit settingsCubit = BlocProvider.of<SettingsCubit>(context);
     return AlertDialog(
       contentPadding: EdgeInsets.zero,
@@ -22,12 +25,10 @@ class DistrictSelectionAlertDialog extends StatelessWidget {
       shape: RoundedRectangleBorder(),
       backgroundColor: Colors.white,
       content: SizedBox(
-        height: context.height *
-            0.091 *
-            propertyAddAdCubit.filteredDistricts.length,
+        height: context.height * 0.091 * settingsCubit.filteredDistricts.length,
         width: context.width * 1,
         child: ListView.builder(
-          itemCount: propertyAddAdCubit.filteredDistricts.length,
+          itemCount: settingsCubit.filteredDistricts.length,
           itemBuilder: (BuildContext context, int index) {
             return ButtonWidget(
               paddingHorizontal: 0,
@@ -37,10 +38,13 @@ class DistrictSelectionAlertDialog extends StatelessWidget {
               // text: (index + 1).toString(),
               // colorText: Colors.black38,
               onTap: () {
-                propertyAddAdCubit.setPropertyField(
-                  'adModelDistrictId',
-                  propertyAddAdCubit.filteredDistricts[index].districtId,
-                );
+                if (forWitchType == 1) {
+                  propertyAddAdCubit.setPropertyField(
+                    'adModelDistrictId',
+                    settingsCubit.filteredDistricts[index].districtId,
+                  );
+                } else if (forWitchType == 2) {}
+
                 Navigator.pop(context);
               },
               child: Column(
@@ -56,22 +60,27 @@ class DistrictSelectionAlertDialog extends StatelessWidget {
                             height: 0,
                             width: 0,
                             child: Radio(
-                              value: propertyAddAdCubit
+                              value: settingsCubit
                                   .filteredDistricts[index].districtId,
-                              groupValue: propertyAddAdCubit
-                                  .propertyAdModel.adModel.districtId,
+                              groupValue: forWitchType == 1
+                                  ? propertyAddAdCubit
+                                      .propertyAdModel.adModel.districtId
+                                  : context,
                               onChanged: (value) {
-                                propertyAddAdCubit.setPropertyField(
-                                  'adModelDistrictId',
-                                  propertyAddAdCubit
-                                      .filteredDistricts[index].districtId,
-                                );
+                                if (forWitchType == 1) {
+                                  propertyAddAdCubit.setPropertyField(
+                                    'adModelDistrictId',
+                                    settingsCubit
+                                        .filteredDistricts[index].districtId,
+                                  );
+                                } else if (forWitchType == 2) {}
+
                                 Navigator.pop(context);
                               },
                             ),
                           ),
                           TextWidget(
-                            text: propertyAddAdCubit
+                            text: settingsCubit
                                 .filteredDistricts[index].districtName,
                             fontSize: 18,
                             color: Colors.black87,

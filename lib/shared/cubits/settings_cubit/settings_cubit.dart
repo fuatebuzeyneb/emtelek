@@ -199,4 +199,13 @@ class SettingsCubit extends Cubit<SettingsState> {
       return [];
     }
   }
+
+//this function will return the districts of the selected city
+  int? cityId;
+  List<DistrictModel> filteredDistricts = [];
+  void selectCityId(int id) {
+    cityId = id;
+
+    emit(SettingsInitial());
+  }
 }

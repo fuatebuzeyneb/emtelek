@@ -10,11 +10,10 @@ class CitySelectionAlertDialog extends StatelessWidget {
   const CitySelectionAlertDialog({
     super.key,
   });
-
+  // final int forWitchType; //if 1 for property if 2 for car
+  //   final void Function(int?) onTap;
   @override
   Widget build(BuildContext context) {
-    PropertyAddAdCubit propertyAddAdCubit =
-        BlocProvider.of<PropertyAddAdCubit>(context);
     SettingsCubit settingsCubit = BlocProvider.of<SettingsCubit>(context);
     return AlertDialog(
       contentPadding: EdgeInsets.zero,
@@ -35,15 +34,14 @@ class CitySelectionAlertDialog extends StatelessWidget {
               // text: (index + 1).toString(),
               // colorText: Colors.black38,
               onTap: () {
-                propertyAddAdCubit
+                settingsCubit
                     .selectCityId(settingsCubit.globalCities[index].cityId);
                 // propertyAddAdCubit.setPropertyField('adModelDistrictId',
                 //     settingsCubit.globalCities[index].cityId);
                 Navigator.pop(context);
-                propertyAddAdCubit.filteredDistricts = settingsCubit
-                    .globalDistricts
-                    .where((district) =>
-                        district.cityId == propertyAddAdCubit.cityId)
+                settingsCubit.filteredDistricts = settingsCubit.globalDistricts
+                    .where(
+                        (district) => district.cityId == settingsCubit.cityId)
                     .toList();
               },
               child: Column(
@@ -59,20 +57,18 @@ class CitySelectionAlertDialog extends StatelessWidget {
                             width: 0,
                             child: Radio(
                               value: settingsCubit.globalCities[index].cityId,
-                              groupValue: propertyAddAdCubit.cityId,
+                              groupValue: settingsCubit.cityId,
                               onChanged: (value) {
-                                propertyAddAdCubit.selectCityId(value!);
+                                settingsCubit.selectCityId(value!);
                                 // propertyAddAdCubit.setPropertyField(
                                 //     'adModelDistrictId',
                                 //     settingsCubit.globalCities[index].cityId);
                                 Navigator.pop(context);
-                                propertyAddAdCubit.filteredDistricts =
-                                    settingsCubit
-                                        .globalDistricts
-                                        .where((district) =>
-                                            district.cityId ==
-                                            propertyAddAdCubit.cityId)
-                                        .toList();
+                                settingsCubit.filteredDistricts = settingsCubit
+                                    .globalDistricts
+                                    .where((district) =>
+                                        district.cityId == settingsCubit.cityId)
+                                    .toList();
                               },
                             ),
                           ),

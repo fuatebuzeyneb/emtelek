@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:emtelek/features/add_listing/data/models/property_add_model.dart';
 import 'package:emtelek/shared/models/add-ads-models/ad_model.dart';
 import 'package:emtelek/shared/models/district-model/district_model.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:meta/meta.dart';
 
@@ -21,11 +22,12 @@ class PropertyAddAdCubit extends Cubit<PropertyAddAdState> {
     emit(PropertyAddAdInitial());
   }
 
-  int? cityId;
-  List<DistrictModel> filteredDistricts = [];
-  void selectCityId(int id) {
-    cityId = id;
+  //just for testing
+  List<XFile> imagesProperty = [];
 
+  void addAllImages(List<XFile> image) {
+    imagesProperty.clear();
+    imagesProperty.addAll(image);
     emit(PropertyAddAdInitial());
   }
 
@@ -108,7 +110,7 @@ class PropertyAddAdCubit extends Cubit<PropertyAddAdState> {
       propertyAdModel.adModel.token = value;
     }
 
-    emit(PropertyAddAdInitial()); // إرسال الحالة الجديدة
+    emit(PropertyAddAdInitial());
   }
 
   void submitProperty() {

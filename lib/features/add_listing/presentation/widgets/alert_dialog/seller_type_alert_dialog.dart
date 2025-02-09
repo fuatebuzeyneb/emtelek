@@ -9,7 +9,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class SellerTypeAlertDialog extends StatelessWidget {
   const SellerTypeAlertDialog({
     super.key,
+    required this.forWitchType,
   });
+
+  final int forWitchType; //if 1 for property if 2 for car
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +36,9 @@ class SellerTypeAlertDialog extends StatelessWidget {
                 // text: (index + 1).toString(),
                 // colorText: Colors.black38,
                 onTap: () {
-                  propertyAddAdCubit.setPropertyField('adModelSellerType', 1);
+                  if (forWitchType == 1) {
+                    propertyAddAdCubit.setPropertyField('adModelSellerType', 1);
+                  } else if (forWitchType == 2) {}
 
                   Navigator.pop(context);
                 },
@@ -48,11 +53,16 @@ class SellerTypeAlertDialog extends StatelessWidget {
                           width: 0,
                           child: Radio(
                             value: 1,
-                            groupValue: propertyAddAdCubit
-                                .propertyAdModel.adModel.sellerType,
+                            groupValue: forWitchType == 1
+                                ? propertyAddAdCubit
+                                    .propertyAdModel.adModel.sellerType
+                                : null,
                             onChanged: (value) {
-                              propertyAddAdCubit.setPropertyField(
-                                  'adModelSellerType', value);
+                              if (forWitchType == 1) {
+                                propertyAddAdCubit.setPropertyField(
+                                    'adModelSellerType', value);
+                              } else if (forWitchType == 2) {}
+
                               Navigator.pop(context);
                             },
                           ),
@@ -82,7 +92,9 @@ class SellerTypeAlertDialog extends StatelessWidget {
                 // text: (index + 1).toString(),
                 // colorText: Colors.black38,
                 onTap: () {
-                  propertyAddAdCubit.setPropertyField('adModelSellerType', 2);
+                  if (forWitchType == 1) {
+                    propertyAddAdCubit.setPropertyField('adModelSellerType', 2);
+                  } else if (forWitchType == 2) {}
 
                   Navigator.pop(context);
                 },
@@ -97,11 +109,16 @@ class SellerTypeAlertDialog extends StatelessWidget {
                           width: 0,
                           child: Radio(
                             value: 2,
-                            groupValue: propertyAddAdCubit
-                                .propertyAdModel.adModel.sellerType,
+                            groupValue: forWitchType == 1
+                                ? propertyAddAdCubit
+                                    .propertyAdModel.adModel.sellerType
+                                : null,
                             onChanged: (value) {
-                              propertyAddAdCubit.setPropertyField(
-                                  'adModelSellerType', value);
+                              if (forWitchType == 1) {
+                                propertyAddAdCubit.setPropertyField(
+                                    'adModelSellerType', value);
+                              } else if (forWitchType == 2) {}
+
                               Navigator.pop(context);
                             },
                           ),

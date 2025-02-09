@@ -97,12 +97,15 @@ class AuthCubit extends Cubit<AuthState> {
         //final isUserExists = await authRepository.checkIfUserExists(user.email ?? '');
 
         // if (!isUserExists) {
+        print('---------------------------------');
+        print('User Data: ${user.uid}');
+        print('---------------------------------');
         await authRepository.signUp(
           firstName: user.displayName?.split(' ').first ?? '',
           lastName: user.displayName?.split(' ').last ?? '',
           phoneNumber: user.phoneNumber ?? '',
           email: user.email ?? '',
-          password: '123456', // لا ينصح بتعيين كلمة مرور ثابتة
+          password: '123456',
           accountType: 2,
         );
         //  }

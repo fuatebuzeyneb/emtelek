@@ -13,8 +13,8 @@ import 'dart:convert';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 class SelectLocation extends StatefulWidget {
-  const SelectLocation({super.key});
-
+  const SelectLocation({super.key, required this.forWitchFeature});
+  final int forWitchFeature; // 1--> Property 2--> Cars
   @override
   _SelectLocationState createState() => _SelectLocationState();
 }
@@ -215,25 +215,24 @@ class _SelectLocationState extends State<SelectLocation> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.white,
         onPressed: () {
-          if (selectedLocation != null) {
-            propertyAddAdCubit.setPropertyField(
-                'adModelLocation', selectedLocation!);
-            print(selectedLocation);
-            Navigator.pop(context, selectedLocation);
-          } else {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('يرجى تحديد موقع')),
-            );
-          }
+          if (widget.forWitchFeature == 1) {
+            if (selectedLocation != null) {
+              propertyAddAdCubit.setPropertyField(
+                  'adModelLocation', selectedLocation!);
+              print(selectedLocation);
+              Navigator.pop(context, selectedLocation);
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('يرجى تحديد موقع')),
+              );
+            }
+          } else if (widget.forWitchFeature == 2) {} // for cars
         },
         child: const Icon(Icons.check, color: Colors.black, size: 32),
       ),
     );
   }
 }
-
-
-
 
 /*
 

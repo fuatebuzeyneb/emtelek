@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:emtelek/core/extensions/media_query_extensions.dart';
 import 'package:emtelek/core/extensions/sized_box_extensions.dart';
 import 'package:emtelek/core/utils/page_transitions.dart';
@@ -10,6 +12,7 @@ import 'package:emtelek/features/add_listing/presentation/widgets/alert_dialog/n
 import 'package:emtelek/features/add_listing/presentation/widgets/alert_dialog/seller_type_alert_dialog.dart';
 import 'package:emtelek/generated/l10n.dart';
 import 'package:emtelek/core/constants/app_colors.dart';
+import 'package:emtelek/shared/common_pages/image_picker.dart';
 import 'package:emtelek/shared/common_pages/select_location.dart';
 import 'package:emtelek/shared/cubits/settings_cubit/settings_cubit.dart';
 import 'package:emtelek/shared/models/district-model/district_model.dart';
@@ -96,7 +99,7 @@ class AddAdDetailsPage extends StatelessWidget {
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(children: [
-                    SizedBox(height: context.height * 0.03),
+                    SizedBox(height: context.height * 0.02),
                     Container(
                       color: Colors.grey[200],
                       padding: const EdgeInsets.symmetric(
@@ -198,7 +201,13 @@ class AddAdDetailsPage extends StatelessWidget {
                           ),
                           12.toHeight,
                           ButtonWidget(
-                            onTap: () {},
+                            onTap: () {
+                              pageTransition(context,
+                                  page: ImagePickerGrid(
+                                    maxImages: 12,
+                                    forWitchFeature: 1,
+                                  ));
+                            },
                             height: 0.06,
                             width: 1,
                             color: Colors.white,
@@ -224,10 +233,68 @@ class AddAdDetailsPage extends StatelessWidget {
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
+                                6.toWidth,
+                                propertyAddAdCubit.imagesProperty.isNotEmpty
+                                    ? Baseline(
+                                        baseline: 20.0,
+                                        baselineType: TextBaseline.alphabetic,
+                                        child: TextWidget(
+                                          text:
+                                              "(تم اضافة ${propertyAddAdCubit.imagesProperty.length} صورة)",
+                                          fontSize: 16,
+                                          color: Colors.green,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      )
+                                    : SizedBox(),
                               ],
                             ),
                           ),
-                          12.toHeight,
+                          propertyAddAdCubit.imagesProperty.isNotEmpty
+                              ? Padding(
+                                  padding: const EdgeInsets.only(
+                                    top: 8,
+                                  ),
+                                  child: SizedBox(
+                                      height: context.height * 0.12,
+                                      width: context.width * 1,
+                                      child: ListView.builder(
+                                        itemCount: propertyAddAdCubit
+                                            .imagesProperty.length,
+                                        scrollDirection: Axis.horizontal,
+                                        itemBuilder:
+                                            (BuildContext context, int index) {
+                                          return Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 2, vertical: 4),
+                                            child: Container(
+                                              height: context.height * 0.12,
+                                              width: context.width * 0.25,
+                                              decoration: BoxDecoration(
+                                                border: Border.all(
+                                                  color: Colors.grey,
+                                                  width: 1,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                              ),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                                child: Image.file(
+                                                  File(propertyAddAdCubit
+                                                      .imagesProperty[index]
+                                                      .path),
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      )),
+                                )
+                              : SizedBox(),
+                          8.toHeight,
                           TextFieldWidget(
                             paddingVertical: 0,
                             hint: S.of(context).PhoneNumber,
@@ -739,7 +806,15 @@ class AddAdDetailsPage extends StatelessWidget {
                                   barrierDismissible: false,
                                   context: context,
                                   builder: (context) {
-                                    return SellerTypeAlertDialog();
+                                    return SellerTypeAlertDialog(
+                                      forWitchType: 1,
+                                      // forWitchType: 1,
+                                      // onTap: (value) {
+                                      //   propertyAddAdCubit.setPropertyField(
+                                      //       'adModelSellerType', value);
+                                      //   Navigator.pop(context);
+                                      // },
+                                    );
                                   });
                             },
                             height: 0.06,
@@ -776,43 +851,48 @@ class AddAdDetailsPage extends StatelessWidget {
                             ),
                           ),
                           12.toHeight,
-                          ButtonWidget(
-                            onTap: () {
-                              showDialog(
-                                  barrierDismissible: false,
-                                  context: context,
-                                  builder: (context) {
-                                    return CitySelectionAlertDialog();
-                                  });
-                            },
-                            height: 0.06,
-                            width: 1,
-                            color: Colors.white,
-                            borderColor: Colors.grey,
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 12),
-                              child: Row(
-                                children: [
-                                  TextWidget(
-                                    text: propertyAddAdCubit.cityId != null
-                                        ? settingsCubit
-                                            .globalCities[
-                                                propertyAddAdCubit.cityId! - 1]
-                                            .cityName
-                                        : S.of(context).City,
-                                    fontSize: 16,
-                                    color: propertyAddAdCubit.cityId != null
-                                        ? Colors.black
-                                        : Colors.black38,
-                                    fontWeight:
-                                        propertyAddAdCubit.cityId != null
+                          BlocBuilder<SettingsCubit, SettingsState>(
+                            builder: (context, state) {
+                              return ButtonWidget(
+                                onTap: () {
+                                  showDialog(
+                                      barrierDismissible: false,
+                                      context: context,
+                                      builder: (context) {
+                                        return CitySelectionAlertDialog();
+                                      });
+                                  propertyAddAdCubit.setPropertyField(
+                                      'adModelDistrictId', null);
+                                },
+                                height: 0.06,
+                                width: 1,
+                                color: Colors.white,
+                                borderColor: Colors.grey,
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 12),
+                                  child: Row(
+                                    children: [
+                                      TextWidget(
+                                        text: settingsCubit.cityId != null
+                                            ? settingsCubit
+                                                .globalCities[
+                                                    settingsCubit.cityId! - 1]
+                                                .cityName
+                                            : S.of(context).City,
+                                        fontSize: 16,
+                                        color: settingsCubit.cityId != null
+                                            ? Colors.black
+                                            : Colors.black38,
+                                        fontWeight: settingsCubit.cityId != null
                                             ? FontWeight.bold
                                             : null,
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
-                            ),
+                                ),
+                              );
+                            },
                           ),
                           12.toHeight,
                           ButtonWidget(
@@ -821,7 +901,9 @@ class AddAdDetailsPage extends StatelessWidget {
                                   barrierDismissible: false,
                                   context: context,
                                   builder: (context) {
-                                    return DistrictSelectionAlertDialog();
+                                    return DistrictSelectionAlertDialog(
+                                      forWitchType: 1,
+                                    );
                                   });
                             },
                             height: 0.06,
@@ -902,7 +984,9 @@ class AddAdDetailsPage extends StatelessWidget {
                                   text: 'اختر الموقع على الخريطة',
                                   onTap: () {
                                     pageTransition(context,
-                                        page: const SelectLocation());
+                                        page: const SelectLocation(
+                                          forWitchFeature: 1,
+                                        ));
                                   },
                                 )
                               : Stack(
@@ -912,7 +996,9 @@ class AddAdDetailsPage extends StatelessWidget {
                                       width: 1,
                                       onTap: () {
                                         pageTransition(context,
-                                            page: const SelectLocation());
+                                            page: const SelectLocation(
+                                              forWitchFeature: 1,
+                                            ));
                                       },
                                       child: FlutterMap(
                                         key: const Key('map'),
@@ -954,7 +1040,9 @@ class AddAdDetailsPage extends StatelessWidget {
                                       child: GestureDetector(
                                         onTap: () {
                                           pageTransition(context,
-                                              page: const SelectLocation());
+                                              page: const SelectLocation(
+                                                forWitchFeature: 1,
+                                              ));
                                         },
                                         child: Container(
                                           color: Colors.white,
