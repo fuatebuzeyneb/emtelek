@@ -217,10 +217,10 @@ class _SelectLocationState extends State<SelectLocation> {
         onPressed: () {
           if (widget.forWitchFeature == 1) {
             if (selectedLocation != null) {
-              propertyAddAdCubit.setPropertyField(
-                  'adModelLocation', selectedLocation!);
+              propertyAddAdCubit.setPropertyField('adModelLocation',
+                  "${selectedLocation!.latitude},${selectedLocation!.longitude}");
               print(selectedLocation);
-              Navigator.pop(context, selectedLocation);
+              Navigator.pop(context);
             } else {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(content: Text('يرجى تحديد موقع')),

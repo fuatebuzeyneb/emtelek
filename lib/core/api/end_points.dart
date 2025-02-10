@@ -2,7 +2,7 @@ class EndPoints {
   static String baseUrl = "https://emtelek.com/api/";
   static String signIn = "clients/login";
   static String signUp = "clients/signup";
-  static String delete = "user/delete";
+  static String adsAdd = "ads/add";
   static String getUserDataEndPoint(id) {
     return "user/get-user/$id";
   }

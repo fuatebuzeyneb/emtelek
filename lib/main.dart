@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:emtelek/core/api/dio_consumer.dart';
 import 'package:emtelek/core/utils/routes.dart';
+import 'package:emtelek/features/add_listing/data/repositories/property_repository.dart';
 import 'package:emtelek/features/add_listing/domain/cubit/property_add_ad_cubit.dart';
 import 'package:emtelek/features/auth/data/repositories/auth_repository.dart';
 import 'package:emtelek/shared/widgets/bottom_nav_bar.dart';
@@ -52,7 +53,9 @@ class MyApp extends StatelessWidget {
           create: (context) => SettingsCubit(),
         ),
         BlocProvider(
-          create: (context) => PropertyAddAdCubit(),
+          create: (context) => PropertyAddAdCubit(
+            PropertyRepositoryImpl(api: DioConsumer(dio: Dio())),
+          ),
         ),
       ],
       child: BlocConsumer<SettingsCubit, SettingsState>(

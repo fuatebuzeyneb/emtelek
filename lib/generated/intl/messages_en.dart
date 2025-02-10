@@ -32,9 +32,14 @@ class MessageLookup extends MessageLookupByLibrary {
             "be relevant to the ad itself to avoid rejection."),
         "AdReviewMessage": MessageLookupByLibrary.simpleMessage(
             "Your ad will be reviewed by the Emtelek team and approved within less than 5 minutes if it complies with the publishing rules, then it will be published on the app."),
+        "AdTitle": MessageLookupByLibrary.simpleMessage(
+            "-----------------------------------------------"),
         "AdTitleHint": MessageLookupByLibrary.simpleMessage("Ad Title"),
+        "AddLocation": MessageLookupByLibrary.simpleMessage("Add location"),
+        "AddPhoto": MessageLookupByLibrary.simpleMessage("Add photo"),
         "AddPhotos": MessageLookupByLibrary.simpleMessage("Add Photos"),
         "AddYourAd": MessageLookupByLibrary.simpleMessage("Add Your Ad"),
+        "Added": MessageLookupByLibrary.simpleMessage("Added"),
         "AdvertiseOnApp":
             MessageLookupByLibrary.simpleMessage("Advertise On App"),
         "Agent": MessageLookupByLibrary.simpleMessage("Agent"),
@@ -127,6 +132,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Login with Facebook"),
         "LoginWithGoogle":
             MessageLookupByLibrary.simpleMessage("Login with Google"),
+        "MainPhoto": MessageLookupByLibrary.simpleMessage("Main photo"),
         "Menu": MessageLookupByLibrary.simpleMessage("Menu"),
         "MostVisitedInRentals":
             MessageLookupByLibrary.simpleMessage("Most Visited in Rentals"),
@@ -150,6 +156,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Owner": MessageLookupByLibrary.simpleMessage("Owner"),
         "Password": MessageLookupByLibrary.simpleMessage("Password"),
         "PhoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
+        "Photo": MessageLookupByLibrary.simpleMessage("Photo"),
         "PlaceAnAd": MessageLookupByLibrary.simpleMessage("Place an Ad"),
         "PostedBy": MessageLookupByLibrary.simpleMessage("Posted By"),
         "Price": MessageLookupByLibrary.simpleMessage("Price"),
@@ -172,6 +179,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Room": MessageLookupByLibrary.simpleMessage("Room"),
         "Sale": MessageLookupByLibrary.simpleMessage("Sale"),
         "SearchFilters": MessageLookupByLibrary.simpleMessage("Search Filters"),
+        "SearchForTheLocation":
+            MessageLookupByLibrary.simpleMessage("Search for the location"),
         "Select": MessageLookupByLibrary.simpleMessage("Select"),
         "SelectCityOrRegion": MessageLookupByLibrary.simpleMessage(
             "Select the cities or regions you want to search for property in"),
@@ -180,13 +189,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "SelectDate": MessageLookupByLibrary.simpleMessage("Select Date"),
         "SelectLanguage":
             MessageLookupByLibrary.simpleMessage("Select Language"),
+        "SelectLocationFromMap":
+            MessageLookupByLibrary.simpleMessage("Select location from map"),
+        "SelectPhoto": MessageLookupByLibrary.simpleMessage("Select photo"),
+        "Set": MessageLookupByLibrary.simpleMessage("Set"),
+        "SetAsMainPhoto":
+            MessageLookupByLibrary.simpleMessage("Set as main photo"),
         "Shop": MessageLookupByLibrary.simpleMessage("Shop"),
         "SignInAndPost":
             MessageLookupByLibrary.simpleMessage("Sign In And Post"),
         "SignOut": MessageLookupByLibrary.simpleMessage("Sign Out"),
         "SignOutFromApp":
             MessageLookupByLibrary.simpleMessage("Sign Out From App!!"),
-        "SquareMeter": MessageLookupByLibrary.simpleMessage("Square Meter"),
+        "SquareMeter": MessageLookupByLibrary.simpleMessage("m²"),
         "SquareMeters": MessageLookupByLibrary.simpleMessage("Square Meters"),
         "Support": MessageLookupByLibrary.simpleMessage("Support"),
         "SyrianPound": MessageLookupByLibrary.simpleMessage("Syrian Pound"),

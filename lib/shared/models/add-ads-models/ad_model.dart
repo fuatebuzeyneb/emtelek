@@ -1,4 +1,4 @@
-import 'package:latlong2/latlong.dart';
+import 'package:dio/dio.dart';
 
 class AdModel {
   String? title;
@@ -8,7 +8,7 @@ class AdModel {
   String? currency;
   String? email;
   String? image;
-  LatLng? location;
+  String? location;
   int? districtId;
   String? address;
   int clientId;
@@ -43,24 +43,24 @@ class AdModel {
       currency: json['Currency'],
       email: json['Email'],
       districtId: json['DistrictId'],
-      clientId: json['ClientId'],
+      clientId: json['ClientId'] ?? 0,
       sellerType: json['SellerType'],
       categoryId: json['CategoryId'],
-      token: json['Token'],
+      token: json['Token'] ?? '',
       address: json['Address'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'Title': title,
+      'AdTitle': title,
       'Price': price,
       'Location': location,
-      'Image': image,
+      //'Image': image,
       'Description': description,
-      'Phone': phone,
+      //  'Phone': phone,
       'Currency': currency,
-      'Email': email,
+      // 'Email': email,
       'DistrictId': districtId,
       'ClientId': clientId,
       'SellerType': sellerType,

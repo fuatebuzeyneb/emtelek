@@ -110,7 +110,6 @@
     "AddPhotos": "Add Photos",
     "USD": "USD",
     "TotalArea": "Total Area",
-    "SquareMeter": "Square Meter",
     "NetAreaOptional": "Net Area (Optional)",
     "BuildingAreaOptional": "Building Area (Optional)",
     "AdDescriptionOptional": "Ad Description (Optional)",
@@ -130,5 +129,17 @@
     "ChooseTheRightCategory": "Now, choose the appropriate category for your ad:",
     "Bathroom": "Bathroom",
     "Type": "Type",
-    "Description": "Description"
+    "Description": "Description",
+    "AdTitle": "-----------------------------------------------",
+    "Added": "Added",
+    "Photo": "Photo",
+    "SquareMeter": "m²",
+    "SelectLocationFromMap": "Select location from map",
+    "SearchForTheLocation": "Search for the location",
+    "AddLocation": "Add location",
+    "AddPhoto": "Add photo",
+    "SelectPhoto": "Select photo",
+    "MainPhoto": "Main photo",
+    "SetAsMainPhoto": "Set as main photo",
+    "Set": "Set"
 }

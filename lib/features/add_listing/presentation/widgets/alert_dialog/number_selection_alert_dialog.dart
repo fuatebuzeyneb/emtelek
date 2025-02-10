@@ -57,8 +57,8 @@ class NumberSelectionAlertDialog extends StatelessWidget {
                             width: 0,
                             child: Radio(
                               value: value,
-                              groupValue: fieldKey == 'romeCount'
-                                  ? propertyAddAdCubit.propertyAdModel.romeCount
+                              groupValue: fieldKey == 'roomCount'
+                                  ? propertyAddAdCubit.propertyAdModel.roomCount
                                   : fieldKey == 'bathroomCount'
                                       ? propertyAddAdCubit
                                           .propertyAdModel.bathroomCount

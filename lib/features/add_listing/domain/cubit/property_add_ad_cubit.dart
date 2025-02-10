@@ -1,9 +1,13 @@
 import 'dart:math';
 
 import 'package:bloc/bloc.dart';
+import 'package:emtelek/core/errors/exceptions.dart';
 import 'package:emtelek/features/add_listing/data/models/property_add_model.dart';
+import 'package:emtelek/features/add_listing/data/repositories/property_repository.dart';
 import 'package:emtelek/shared/models/add-ads-models/ad_model.dart';
 import 'package:emtelek/shared/models/district-model/district_model.dart';
+import 'package:emtelek/shared/services/cache_hekper.dart';
+import 'package:emtelek/shared/services/service_locator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:meta/meta.dart';
@@ -11,8 +15,8 @@ import 'package:meta/meta.dart';
 part 'property_add_ad_state.dart';
 
 class PropertyAddAdCubit extends Cubit<PropertyAddAdState> {
-  PropertyAddAdCubit() : super(PropertyAddAdInitial());
-
+  PropertyAddAdCubit(this.propertyRepository) : super(PropertyAddAdInitial());
+  final PropertyRepository propertyRepository;
   // 6--> Property for buy
 // 5--> Property for rent
   int? categoryForAdType;
@@ -34,7 +38,7 @@ class PropertyAddAdCubit extends Cubit<PropertyAddAdState> {
   PropertyAdModel propertyAdModel = PropertyAdModel(
       totalArea: null,
       netOrBuildingArea: null,
-      romeCount: null,
+      roomCount: null,
       bathroomCount: null,
       floorCount: null,
       floorNumber: null,
@@ -52,10 +56,10 @@ class PropertyAddAdCubit extends Cubit<PropertyAddAdState> {
         currency: null,
         email: null,
         districtId: null,
-        clientId: 0,
+        clientId: getIt<CacheHelper>().getData(key: 'clientId')!,
         sellerType: null,
         categoryId: null,
-        token: '',
+        token: getIt<CacheHelper>().getDataString(key: 'token')!,
         address: null,
       ));
 
@@ -64,8 +68,8 @@ class PropertyAddAdCubit extends Cubit<PropertyAddAdState> {
       propertyAdModel.totalArea = value;
     } else if (field == 'netOrBuildingArea') {
       propertyAdModel.netOrBuildingArea = value;
-    } else if (field == 'romeCount') {
-      propertyAdModel.romeCount = value;
+    } else if (field == 'roomCount') {
+      propertyAdModel.roomCount = value;
     } else if (field == 'bathroomCount') {
       propertyAdModel.bathroomCount = value;
     } else if (field == 'floorCount') {
@@ -113,9 +117,18 @@ class PropertyAddAdCubit extends Cubit<PropertyAddAdState> {
     emit(PropertyAddAdInitial());
   }
 
-  void submitProperty() {
-    print('----------------------------------------------');
-    print(propertyAdModel);
-    print('----------------------------------------------');
+  Future<void> addAdPropertyFunc() async {
+    try {
+      emit(PropertyAddAdLoading());
+      final data = await propertyRepository.addAdProperty(
+        propertyAdModel: propertyAdModel,
+      );
+
+      print("🔵 PropertyAddAdCubit.addAdProperty data: $data");
+
+      emit(PropertyAddAdSuccess());
+    } on ServerException catch (e) {
+      emit(PropertyAddAdFailure(errorMassage: e.errorModel.errorMessage));
+    }
   }
 }

@@ -1162,16 +1162,6 @@ class S {
     );
   }
 
-  /// `Square Meter`
-  String get SquareMeter {
-    return Intl.message(
-      'Square Meter',
-      name: 'SquareMeter',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Net Area (Optional)`
   String get NetAreaOptional {
     return Intl.message(
@@ -1367,6 +1357,126 @@ class S {
     return Intl.message(
       'Description',
       name: 'Description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `-----------------------------------------------`
+  String get AdTitle {
+    return Intl.message(
+      '-----------------------------------------------',
+      name: 'AdTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Added`
+  String get Added {
+    return Intl.message(
+      'Added',
+      name: 'Added',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Photo`
+  String get Photo {
+    return Intl.message(
+      'Photo',
+      name: 'Photo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `m²`
+  String get SquareMeter {
+    return Intl.message(
+      'm²',
+      name: 'SquareMeter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select location from map`
+  String get SelectLocationFromMap {
+    return Intl.message(
+      'Select location from map',
+      name: 'SelectLocationFromMap',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search for the location`
+  String get SearchForTheLocation {
+    return Intl.message(
+      'Search for the location',
+      name: 'SearchForTheLocation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add location`
+  String get AddLocation {
+    return Intl.message(
+      'Add location',
+      name: 'AddLocation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add photo`
+  String get AddPhoto {
+    return Intl.message(
+      'Add photo',
+      name: 'AddPhoto',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select photo`
+  String get SelectPhoto {
+    return Intl.message(
+      'Select photo',
+      name: 'SelectPhoto',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Main photo`
+  String get MainPhoto {
+    return Intl.message(
+      'Main photo',
+      name: 'MainPhoto',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Set as main photo`
+  String get SetAsMainPhoto {
+    return Intl.message(
+      'Set as main photo',
+      name: 'SetAsMainPhoto',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Set`
+  String get Set {
+    return Intl.message(
+      'Set',
+      name: 'Set',
       desc: '',
       args: [],
     );

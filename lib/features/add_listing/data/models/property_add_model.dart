@@ -4,7 +4,7 @@ class PropertyAdModel {
   AdModel adModel;
   double? totalArea;
   double? netOrBuildingArea;
-  int? romeCount;
+  int? roomCount;
   int? bathroomCount;
   int? floorCount;
   int? floorNumber;
@@ -17,7 +17,7 @@ class PropertyAdModel {
     required this.adModel,
     required this.totalArea,
     this.netOrBuildingArea,
-    this.romeCount,
+    this.roomCount,
     this.bathroomCount,
     this.floorCount,
     this.floorNumber,
@@ -32,7 +32,7 @@ class PropertyAdModel {
       adModel: AdModel.fromJson(json),
       totalArea: json["totalArea"],
       netOrBuildingArea: json["netOrBuildingArea"],
-      romeCount: json["romeCount"],
+      roomCount: json["roomCount"],
       bathroomCount: json["bathroomCount"],
       floorCount: json["floorCount"],
       floorNumber: json["floorNumber"],
@@ -45,16 +45,16 @@ class PropertyAdModel {
 
   Map<String, dynamic> toJson() => {
         ...adModel.toJson(),
-        "totalArea": totalArea,
-        "netOrBuildingArea": netOrBuildingArea,
-        "romeCount": romeCount,
-        "bathroomCount": bathroomCount,
-        "floorCount": floorCount,
-        "floorNumber": floorNumber,
-        "balconyCount": balconyCount,
-        "constructionDate": constructionDate,
-        "furnished": furnished,
-        "complexName": complexName,
+        "TotalArea": totalArea,
+        "NetArea": netOrBuildingArea,
+        "RoomCount": roomCount,
+        "BathroomCount": bathroomCount,
+        "FloorCount": floorCount,
+        "FloorNumber": floorNumber,
+        "BalconyCount": balconyCount,
+        "ConstructionDate": constructionDate,
+        "Furnish": furnished,
+        "ComplexName": complexName,
       };
 
   @override
@@ -63,7 +63,7 @@ class PropertyAdModel {
         'adModel: $adModel, '
         'totalArea: $totalArea, '
         'netOrBuildingArea: $netOrBuildingArea, '
-        'romeCount: $romeCount, '
+        'roomCount: $roomCount, '
         'bathroomCount: $bathroomCount, '
         'floorCount: $floorCount, '
         'floorNumber: $floorNumber, '

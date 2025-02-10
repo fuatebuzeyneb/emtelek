@@ -405,7 +405,7 @@ class AddAdDetailsPage extends StatelessWidget {
                                       context: context,
                                       builder: (context) {
                                         return NumberSelectionAlertDialog(
-                                          fieldKey: 'romeCount',
+                                          fieldKey: 'roomCount',
                                           startIndex: 0,
                                           itemCount: 15,
                                         );
@@ -422,18 +422,18 @@ class AddAdDetailsPage extends StatelessWidget {
                                     children: [
                                       TextWidget(
                                         text: propertyAddAdCubit.propertyAdModel
-                                                    .romeCount ==
+                                                    .roomCount ==
                                                 null
                                             ? ''
                                             : propertyAddAdCubit
-                                                .propertyAdModel.romeCount
+                                                .propertyAdModel.roomCount
                                                 .toString(),
                                         fontSize: 18,
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold,
                                       ),
                                       propertyAddAdCubit
-                                                  .propertyAdModel.romeCount ==
+                                                  .propertyAdModel.roomCount ==
                                               null
                                           ? SizedBox()
                                           : Spacer(),
@@ -1003,10 +1003,11 @@ class AddAdDetailsPage extends StatelessWidget {
                                       child: FlutterMap(
                                         key: const Key('map'),
                                         options: MapOptions(
-                                          initialCenter: propertyAddAdCubit
-                                              .propertyAdModel
-                                              .adModel
-                                              .location!,
+                                          initialCenter: settingsCubit
+                                              .parseLatLng(propertyAddAdCubit
+                                                  .propertyAdModel
+                                                  .adModel
+                                                  .location!),
                                         ),
                                         mapController: MapController(),
                                         children: [
@@ -1019,10 +1020,12 @@ class AddAdDetailsPage extends StatelessWidget {
                                           MarkerLayer(
                                             markers: [
                                               Marker(
-                                                point: propertyAddAdCubit
-                                                    .propertyAdModel
-                                                    .adModel
-                                                    .location!,
+                                                point:
+                                                    settingsCubit.parseLatLng(
+                                                        propertyAddAdCubit
+                                                            .propertyAdModel
+                                                            .adModel
+                                                            .location!),
                                                 child: const Icon(
                                                   Icons.location_on,
                                                   color: Colors.red,
@@ -1068,7 +1071,11 @@ class AddAdDetailsPage extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: ButtonWidget(
                   onTap: () {
-                    propertyAddAdCubit.submitProperty();
+                    propertyAddAdCubit.setPropertyField('adModelCategoryId',
+                        propertyAddAdCubit.categoryForAdType);
+                    propertyAddAdCubit.setPropertyField(
+                        'adModelCurrency', 'USD');
+                    propertyAddAdCubit.addAdPropertyFunc();
                   },
                   text: S.of(context).Apply,
                   height: 0.06,

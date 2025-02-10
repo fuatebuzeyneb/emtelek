@@ -11,6 +11,7 @@ import 'package:emtelek/shared/models/district-model/district_model.dart';
 import 'package:flutter/material.dart';
 
 import 'package:hive/hive.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:meta/meta.dart';
 
 part 'settings_state.dart';
@@ -207,5 +208,12 @@ class SettingsCubit extends Cubit<SettingsState> {
     cityId = id;
 
     emit(SettingsInitial());
+  }
+
+  LatLng parseLatLng(String locationString) {
+    List<String> coordinates = locationString.split(",");
+    double latitude = double.parse(coordinates[0].trim());
+    double longitude = double.parse(coordinates[1].trim());
+    return LatLng(latitude, longitude);
   }
 }
