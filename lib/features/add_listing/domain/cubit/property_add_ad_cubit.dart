@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:emtelek/core/errors/exceptions.dart';
 import 'package:emtelek/features/add_listing/data/models/property_add_model.dart';
 import 'package:emtelek/features/add_listing/data/repositories/property_repository.dart';
+import 'package:emtelek/generated/l10n.dart';
 import 'package:emtelek/shared/models/add-ads-models/ad_model.dart';
 import 'package:emtelek/shared/models/district-model/district_model.dart';
 import 'package:emtelek/shared/services/cache_hekper.dart';
@@ -19,6 +20,28 @@ class PropertyAddAdCubit extends Cubit<PropertyAddAdState> {
   final PropertyRepository propertyRepository;
   // 6--> Property for buy
 // 5--> Property for rent
+
+  final Map<int, String> rentCategories = {
+    7: S.current.Room,
+    8: S.current.Apartment,
+    9: S.current.Shop,
+    10: S.current.Building,
+    11: S.current.Land,
+    12: S.current.Villa,
+    13: S.current.Factory,
+    22: S.current.Office,
+  };
+
+  final Map<int, String> saleCategories = {
+    14: S.current.Apartment,
+    15: S.current.Shop,
+    16: S.current.Building,
+    17: S.current.Land,
+    18: S.current.Villa,
+    19: S.current.Factory,
+    23: S.current.Office,
+  };
+
   int? categoryForAdType;
 
   void changeCategoryForAdType(int type) {

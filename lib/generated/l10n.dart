@@ -1252,6 +1252,76 @@ class S {
     );
   }
 
+  /// `Net Area`
+  String get NetArea {
+    return Intl.message(
+      'Net Area',
+      name: 'NetArea',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Building Area`
+  String get BuildingArea {
+    return Intl.message(
+      'Building Area',
+      name: 'BuildingArea',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ad Description`
+  String get AdDescription {
+    return Intl.message(
+      'Ad Description',
+      name: 'AdDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Floor Number`
+  String get FloorNumber {
+    return Intl.message(
+      'Floor Number',
+      name: 'FloorNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Floor Count`
+  String get FloorCount {
+    return Intl.message(
+      'Floor Count',
+      name: 'FloorCount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Number of Balconies`
+  String get NumberOfBalconies {
+    return Intl.message(
+      'Number of Balconies',
+      name: 'NumberOfBalconies',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Construction Date`
+  String get ConstructionDate {
+    return Intl.message(
+      'Construction Date',
+      name: 'ConstructionDate',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Property Owner`
   String get PropertyOwner {
     return Intl.message(
@@ -1292,11 +1362,31 @@ class S {
     );
   }
 
+  /// `Neighborhood and Street`
+  String get NeighborhoodAndStreet {
+    return Intl.message(
+      'Neighborhood and Street',
+      name: 'NeighborhoodAndStreet',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Building or Complex Name (Optional)`
   String get BuildingOrComplexNameOptional {
     return Intl.message(
       'Building or Complex Name (Optional)',
       name: 'BuildingOrComplexNameOptional',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Building or Complex Name`
+  String get BuildingOrComplexName {
+    return Intl.message(
+      'Building or Complex Name',
+      name: 'BuildingOrComplexName',
       desc: '',
       args: [],
     );
@@ -1362,10 +1452,10 @@ class S {
     );
   }
 
-  /// `-----------------------------------------------`
+  /// `Ad Title`
   String get AdTitle {
     return Intl.message(
-      '-----------------------------------------------',
+      'Ad Title',
       name: 'AdTitle',
       desc: '',
       args: [],
@@ -1477,6 +1567,36 @@ class S {
     return Intl.message(
       'Set',
       name: 'Set',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ad Preview`
+  String get AdPreview {
+    return Intl.message(
+      'Ad Preview',
+      name: 'AdPreview',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `undefined`
+  String get undefined {
+    return Intl.message(
+      'undefined',
+      name: 'undefined',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Currency`
+  String get Currency {
+    return Intl.message(
+      'Currency',
+      name: 'Currency',
       desc: '',
       args: [],
     );

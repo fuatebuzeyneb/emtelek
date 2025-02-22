@@ -24,16 +24,23 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "AccountSettings":
             MessageLookupByLibrary.simpleMessage("Hesap Ayarları"),
+        "AdDescription":
+            MessageLookupByLibrary.simpleMessage("Ilan Açıklaması"),
         "AdDescriptionOptional":
             MessageLookupByLibrary.simpleMessage("İlan Açıklaması (Opsiyonel)"),
         "AdInfoNote": MessageLookupByLibrary.simpleMessage("İlan bilgileri"),
+        "AdPreview": MessageLookupByLibrary.simpleMessage("İlan Önizleme"),
         "AdRejectionReason": MessageLookupByLibrary.simpleMessage(
             "ilginç olmayan ilanlar reddedilecektir."),
         "AdReviewMessage": MessageLookupByLibrary.simpleMessage(
             "İlanınız Emtelek ekibi tarafından incelenecek ve yayın kurallarına uygun ise 5 dakikadan kısa sürede onaylanacak, ardından uygulamada yayınlanacaktır."),
+        "AdTitle": MessageLookupByLibrary.simpleMessage("İlan Başlığı"),
         "AdTitleHint": MessageLookupByLibrary.simpleMessage("İlan Başlığı"),
+        "AddLocation": MessageLookupByLibrary.simpleMessage("Konumu ekle"),
+        "AddPhoto": MessageLookupByLibrary.simpleMessage("Fotografı ekle"),
         "AddPhotos": MessageLookupByLibrary.simpleMessage("Fotoğraf Ekle"),
         "AddYourAd": MessageLookupByLibrary.simpleMessage("İlanınızı Ekleyin"),
+        "Added": MessageLookupByLibrary.simpleMessage("Eklendi"),
         "AdvertiseOnApp":
             MessageLookupByLibrary.simpleMessage("Uygulamada Reklam Verin"),
         "Agent": MessageLookupByLibrary.simpleMessage("Emlakçı"),
@@ -50,8 +57,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "Bathroom": MessageLookupByLibrary.simpleMessage("Banyo"),
         "Blog": MessageLookupByLibrary.simpleMessage("Blog"),
         "Building": MessageLookupByLibrary.simpleMessage("Bina"),
+        "BuildingArea": MessageLookupByLibrary.simpleMessage("Bina Alanı"),
         "BuildingAreaOptional":
             MessageLookupByLibrary.simpleMessage("Bina Alanı (Opsiyonel)"),
+        "BuildingOrComplexName":
+            MessageLookupByLibrary.simpleMessage("Bina veya Kompleks Adı"),
         "BuildingOrComplexNameOptional": MessageLookupByLibrary.simpleMessage(
             "Bina veya Kompleks Adı (Opsiyonel)"),
         "ByContinuingYouAgreeTo": MessageLookupByLibrary.simpleMessage(
@@ -66,11 +76,14 @@ class MessageLookup extends MessageLookupByLibrary {
             "Şimdi, ilanınız için uygun kategoriyi seçin:"),
         "City": MessageLookupByLibrary.simpleMessage("Şehir"),
         "Close": MessageLookupByLibrary.simpleMessage("Kapat"),
+        "ConstructionDate":
+            MessageLookupByLibrary.simpleMessage("Yapım Tarihi"),
         "ConstructionDateOptional":
             MessageLookupByLibrary.simpleMessage("Yapım Tarihi (Opsiyonel)"),
         "ContactUs": MessageLookupByLibrary.simpleMessage("Bize Ulaşın"),
         "CreateNewAccount":
             MessageLookupByLibrary.simpleMessage("Yeni Hesap Oluştur"),
+        "Currency": MessageLookupByLibrary.simpleMessage("Para"),
         "CurrencyConversion":
             MessageLookupByLibrary.simpleMessage("Döviz Kurları"),
         "Description": MessageLookupByLibrary.simpleMessage("Açıklama"),
@@ -97,8 +110,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "FindOffice":
             MessageLookupByLibrary.simpleMessage("Ofisinizi Burada Bulun"),
         "FirstName": MessageLookupByLibrary.simpleMessage("Ad"),
+        "FloorCount": MessageLookupByLibrary.simpleMessage("Kat Sayısı"),
         "FloorCountOptional":
             MessageLookupByLibrary.simpleMessage("Kat Sayısı (Opsiyonel)"),
+        "FloorNumber": MessageLookupByLibrary.simpleMessage("Kat Numarası"),
         "FloorNumberOptional":
             MessageLookupByLibrary.simpleMessage("Kat Numarası (Opsiyonel)"),
         "ForRent": MessageLookupByLibrary.simpleMessage("Kiralık"),
@@ -129,17 +144,23 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Facebook ile Giriş Yap"),
         "LoginWithGoogle":
             MessageLookupByLibrary.simpleMessage("Google ile Giriş Yap"),
+        "MainPhoto": MessageLookupByLibrary.simpleMessage("Ana Fotograf"),
         "Menu": MessageLookupByLibrary.simpleMessage("Menü"),
         "MostVisitedInRentals": MessageLookupByLibrary.simpleMessage(
             "Kiralamada En Çok Ziyaret Edilenler"),
         "MyAds": MessageLookupByLibrary.simpleMessage("İlanlarım"),
         "MySearches": MessageLookupByLibrary.simpleMessage("Aramalarım"),
+        "NeighborhoodAndStreet":
+            MessageLookupByLibrary.simpleMessage("Mahalle ve Sokak"),
         "NeighborhoodAndStreetOptional": MessageLookupByLibrary.simpleMessage(
             "Mahalle ve Sokak, örn. Abou Roumaneh Mahallesi - Al Jalaa Caddesi (Opsiyonel)"),
+        "NetArea": MessageLookupByLibrary.simpleMessage("Net Alan"),
         "NetAreaOptional":
             MessageLookupByLibrary.simpleMessage("Net Alan (Opsiyonel)"),
         "NotificationPreferences":
             MessageLookupByLibrary.simpleMessage("Bildirim Tercihleri"),
+        "NumberOfBalconies":
+            MessageLookupByLibrary.simpleMessage("Balkon Sayısı"),
         "NumberOfBalconiesOptional":
             MessageLookupByLibrary.simpleMessage("Balkon Sayısı (Opsiyonel)"),
         "NumberOfBathrooms":
@@ -151,6 +172,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Owner": MessageLookupByLibrary.simpleMessage("Sahibi"),
         "Password": MessageLookupByLibrary.simpleMessage("Şifre"),
         "PhoneNumber": MessageLookupByLibrary.simpleMessage("Telefon Numarası"),
+        "Photo": MessageLookupByLibrary.simpleMessage("Fotograf"),
         "PlaceAnAd": MessageLookupByLibrary.simpleMessage("İlan Ver"),
         "PostedBy": MessageLookupByLibrary.simpleMessage("Gönderen"),
         "Price": MessageLookupByLibrary.simpleMessage("Fiyat"),
@@ -175,6 +197,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Sale": MessageLookupByLibrary.simpleMessage("Satılık"),
         "SearchFilters":
             MessageLookupByLibrary.simpleMessage("Arama Filtreleri"),
+        "SearchForTheLocation":
+            MessageLookupByLibrary.simpleMessage("Konumu arayın"),
         "Select": MessageLookupByLibrary.simpleMessage("Seç"),
         "SelectCityOrRegion": MessageLookupByLibrary.simpleMessage(
             "Emlak aramak istediğiniz şehirleri veya bölgeleri seçin"),
@@ -182,13 +206,19 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Para Birimi Seçin"),
         "SelectDate": MessageLookupByLibrary.simpleMessage("Tarih Seçin"),
         "SelectLanguage": MessageLookupByLibrary.simpleMessage("Dil Seçin"),
+        "SelectLocationFromMap":
+            MessageLookupByLibrary.simpleMessage("Haritadan konumu seçin"),
+        "SelectPhoto": MessageLookupByLibrary.simpleMessage("Fotografı seçin"),
+        "Set": MessageLookupByLibrary.simpleMessage("Ayarla"),
+        "SetAsMainPhoto":
+            MessageLookupByLibrary.simpleMessage("Ana Fotograf olarak ayarla"),
         "Shop": MessageLookupByLibrary.simpleMessage("Dükkan"),
         "SignInAndPost":
             MessageLookupByLibrary.simpleMessage("Giriş Yap ve Gönder"),
         "SignOut": MessageLookupByLibrary.simpleMessage("Çıkış Yap"),
         "SignOutFromApp":
             MessageLookupByLibrary.simpleMessage("Uygulamadan Çıkış Yapın!!"),
-        "SquareMeter": MessageLookupByLibrary.simpleMessage("Metrekare"),
+        "SquareMeter": MessageLookupByLibrary.simpleMessage("m²"),
         "SquareMeters": MessageLookupByLibrary.simpleMessage("Metrekare"),
         "Support": MessageLookupByLibrary.simpleMessage("Destek"),
         "SyrianPound": MessageLookupByLibrary.simpleMessage("Suriye Lirası"),
@@ -210,6 +240,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Villa": MessageLookupByLibrary.simpleMessage("Villa"),
         "WhatWouldYouLikeToAdvertise": MessageLookupByLibrary.simpleMessage(
             "Ne hakkında reklam yapmak istersiniz?"),
-        "WhatsAppContact": MessageLookupByLibrary.simpleMessage("WhatsApp.")
+        "WhatsAppContact": MessageLookupByLibrary.simpleMessage("WhatsApp."),
+        "undefined": MessageLookupByLibrary.simpleMessage("Tanımsız")
       };
 }

@@ -2,8 +2,8 @@ import 'package:emtelek/shared/models/add-ads-models/ad_model.dart';
 
 class PropertyAdModel {
   AdModel adModel;
-  double? totalArea;
-  double? netOrBuildingArea;
+  int? totalArea;
+  int? netOrBuildingArea;
   int? roomCount;
   int? bathroomCount;
   int? floorCount;

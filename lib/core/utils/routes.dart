@@ -1,3 +1,4 @@
+import 'package:emtelek/features/add_listing/presentation/pages/finish_page.dart';
 import 'package:emtelek/features/auth/presentation/pages/forgot_password_page.dart';
 import 'package:emtelek/features/auth/presentation/pages/login_page.dart';
 import 'package:emtelek/features/auth/presentation/pages/signup_page.dart';
@@ -11,4 +12,5 @@ final Map<String, Widget Function(BuildContext)> routes = {
 
   ForgotPasswordPage.id: (context) => const ForgotPasswordPage(),
   SignupPage.id: (context) => const SignupPage(),
+  FinishPage.id: (context) => const FinishPage(),
 };

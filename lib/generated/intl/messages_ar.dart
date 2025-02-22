@@ -24,17 +24,23 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "AccountSettings":
             MessageLookupByLibrary.simpleMessage("اعدادات الحساب"),
+        "AdDescription": MessageLookupByLibrary.simpleMessage("وصف الإعلان"),
         "AdDescriptionOptional":
             MessageLookupByLibrary.simpleMessage("وصف الإعلان (اختياري)"),
         "AdInfoNote": MessageLookupByLibrary.simpleMessage(
             " يجب أن يكون معلومات الإعلان"),
+        "AdPreview": MessageLookupByLibrary.simpleMessage("معاينة الاعلان"),
         "AdRejectionReason": MessageLookupByLibrary.simpleMessage(
             "مرتبطًا بالإعلان نفسة كي لا يتم رفضه."),
         "AdReviewMessage": MessageLookupByLibrary.simpleMessage(
             "سوف يتم مراجعة إعلانك من قبل فريق إمْتَلك وسيتم الموافقة عليه في أقل من 5 دقائق إذا لم يكن يخل بشروط النشر، ثم سيتم نشره على التطبيق."),
+        "AdTitle": MessageLookupByLibrary.simpleMessage("عنوان الإعلان"),
         "AdTitleHint": MessageLookupByLibrary.simpleMessage("عنوان الإعلان"),
+        "AddLocation": MessageLookupByLibrary.simpleMessage("اضف الموقع"),
+        "AddPhoto": MessageLookupByLibrary.simpleMessage("اضف صورة"),
         "AddPhotos": MessageLookupByLibrary.simpleMessage("أضف الصور"),
         "AddYourAd": MessageLookupByLibrary.simpleMessage("أضف اعلانك"),
+        "Added": MessageLookupByLibrary.simpleMessage("تم اضافته"),
         "AdvertiseOnApp":
             MessageLookupByLibrary.simpleMessage("الاعلان على إمْتَلك"),
         "Agent": MessageLookupByLibrary.simpleMessage("وكيل"),
@@ -51,8 +57,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "Bathroom": MessageLookupByLibrary.simpleMessage("حمام"),
         "Blog": MessageLookupByLibrary.simpleMessage("المدونة"),
         "Building": MessageLookupByLibrary.simpleMessage("مبنى"),
+        "BuildingArea": MessageLookupByLibrary.simpleMessage("مساحة البناء"),
         "BuildingAreaOptional":
             MessageLookupByLibrary.simpleMessage("مساحة البناء (اختياري)"),
+        "BuildingOrComplexName":
+            MessageLookupByLibrary.simpleMessage("اسم المجمع أو البناء"),
         "BuildingOrComplexNameOptional": MessageLookupByLibrary.simpleMessage(
             "اسم المجمع أو البناء (اختياري)"),
         "ByContinuingYouAgreeTo":
@@ -67,11 +76,14 @@ class MessageLookup extends MessageLookupByLibrary {
             "الأن, اختر الفئة المناسبة لاعلانك:"),
         "City": MessageLookupByLibrary.simpleMessage("المدينة"),
         "Close": MessageLookupByLibrary.simpleMessage("اغلاق"),
+        "ConstructionDate":
+            MessageLookupByLibrary.simpleMessage("تاريخ البناء"),
         "ConstructionDateOptional":
             MessageLookupByLibrary.simpleMessage("تاريخ البناء (اختياري)"),
         "ContactUs": MessageLookupByLibrary.simpleMessage("اتصل بنا"),
         "CreateNewAccount":
             MessageLookupByLibrary.simpleMessage("أنشىء حساب جديد"),
+        "Currency": MessageLookupByLibrary.simpleMessage("العملة"),
         "CurrencyConversion":
             MessageLookupByLibrary.simpleMessage("تحويل العملة"),
         "Description": MessageLookupByLibrary.simpleMessage("وصف"),
@@ -94,8 +106,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "FindLand": MessageLookupByLibrary.simpleMessage("ابحث عن أرضك هنا"),
         "FindOffice": MessageLookupByLibrary.simpleMessage("ابحث عن مكتبك هنا"),
         "FirstName": MessageLookupByLibrary.simpleMessage("الاسم الاول"),
+        "FloorCount": MessageLookupByLibrary.simpleMessage("عدد الطوابق"),
         "FloorCountOptional":
             MessageLookupByLibrary.simpleMessage("عدد الطوابق (اختياري)"),
+        "FloorNumber": MessageLookupByLibrary.simpleMessage("رقم الطابق"),
         "FloorNumberOptional":
             MessageLookupByLibrary.simpleMessage("رقم الطابق (اختياري)"),
         "ForRent": MessageLookupByLibrary.simpleMessage("للايجار"),
@@ -126,17 +140,23 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("تسجيل الدخول بواسطة فيسبوك"),
         "LoginWithGoogle":
             MessageLookupByLibrary.simpleMessage("تسجيل الدخول بواسطة جوجل"),
+        "MainPhoto": MessageLookupByLibrary.simpleMessage("الصورة الرئيسية"),
         "Menu": MessageLookupByLibrary.simpleMessage("القائمة"),
         "MostVisitedInRentals":
             MessageLookupByLibrary.simpleMessage("الأكثر زيارة في الإيجارات"),
         "MyAds": MessageLookupByLibrary.simpleMessage("اعلاناتي"),
         "MySearches": MessageLookupByLibrary.simpleMessage("البحوث المحفوظة"),
+        "NeighborhoodAndStreet":
+            MessageLookupByLibrary.simpleMessage("الحي والشارع"),
         "NeighborhoodAndStreetOptional": MessageLookupByLibrary.simpleMessage(
             "الحي والشارع مثل: حي أبو رمانة - شارع الجلاء (اختياري)"),
+        "NetArea": MessageLookupByLibrary.simpleMessage("صافي المساحة"),
         "NetAreaOptional":
             MessageLookupByLibrary.simpleMessage("صافي المساحة (اختياري)"),
         "NotificationPreferences":
             MessageLookupByLibrary.simpleMessage("تفضيلات الاشعارات"),
+        "NumberOfBalconies":
+            MessageLookupByLibrary.simpleMessage("عدد الشرفات"),
         "NumberOfBalconiesOptional":
             MessageLookupByLibrary.simpleMessage("عدد الشرفات (اختياري)"),
         "NumberOfBathrooms":
@@ -148,6 +168,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Owner": MessageLookupByLibrary.simpleMessage("مالك"),
         "Password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
         "PhoneNumber": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
+        "Photo": MessageLookupByLibrary.simpleMessage("صورة"),
         "PlaceAnAd": MessageLookupByLibrary.simpleMessage("اضف اعلانك"),
         "PostedBy": MessageLookupByLibrary.simpleMessage("نشر بواسطة"),
         "Price": MessageLookupByLibrary.simpleMessage("السعر"),
@@ -169,19 +190,27 @@ class MessageLookup extends MessageLookupByLibrary {
         "Room": MessageLookupByLibrary.simpleMessage("غرفة"),
         "Sale": MessageLookupByLibrary.simpleMessage("بيع"),
         "SearchFilters": MessageLookupByLibrary.simpleMessage("فلاتر البحث"),
+        "SearchForTheLocation":
+            MessageLookupByLibrary.simpleMessage("ابحث عن الموقع"),
         "Select": MessageLookupByLibrary.simpleMessage("اختر"),
         "SelectCityOrRegion": MessageLookupByLibrary.simpleMessage(
             "اختر المدن او المناطق التي تريد البحث عن عقار فيها"),
         "SelectCurrency": MessageLookupByLibrary.simpleMessage("اختر العملة"),
         "SelectDate": MessageLookupByLibrary.simpleMessage("اختر التاريخ"),
         "SelectLanguage": MessageLookupByLibrary.simpleMessage("اختر اللغة"),
+        "SelectLocationFromMap":
+            MessageLookupByLibrary.simpleMessage("اختر الموقع من الخريطة"),
+        "SelectPhoto": MessageLookupByLibrary.simpleMessage("اختر صورة"),
+        "Set": MessageLookupByLibrary.simpleMessage("حفظ"),
+        "SetAsMainPhoto":
+            MessageLookupByLibrary.simpleMessage("اضبطها كصورة رئيسية"),
         "Shop": MessageLookupByLibrary.simpleMessage("محل"),
         "SignInAndPost": MessageLookupByLibrary.simpleMessage(
             "سجل الدخول وادرج اعلانك في إمْتَلك"),
         "SignOut": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
         "SignOutFromApp":
             MessageLookupByLibrary.simpleMessage("تسجيل الخروج من التطبيق!!"),
-        "SquareMeter": MessageLookupByLibrary.simpleMessage("متر مربع"),
+        "SquareMeter": MessageLookupByLibrary.simpleMessage("م²"),
         "SquareMeters": MessageLookupByLibrary.simpleMessage("متر مربع"),
         "Support": MessageLookupByLibrary.simpleMessage("الدعم"),
         "SyrianPound": MessageLookupByLibrary.simpleMessage("الليرة السورية"),
@@ -203,6 +232,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Villa": MessageLookupByLibrary.simpleMessage("فيلا"),
         "WhatWouldYouLikeToAdvertise":
             MessageLookupByLibrary.simpleMessage("ما الذي ترغب بالاعلان عنه؟"),
-        "WhatsAppContact": MessageLookupByLibrary.simpleMessage("الواتس اب.")
+        "WhatsAppContact": MessageLookupByLibrary.simpleMessage("الواتس اب."),
+        "undefined": MessageLookupByLibrary.simpleMessage("غير محدد")
       };
 }

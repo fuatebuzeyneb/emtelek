@@ -4,6 +4,7 @@ import 'package:emtelek/core/extensions/media_query_extensions.dart';
 import 'package:emtelek/core/extensions/sized_box_extensions.dart';
 import 'package:emtelek/core/utils/page_transitions.dart';
 import 'package:emtelek/features/add_listing/domain/cubit/property_add_ad_cubit.dart';
+import 'package:emtelek/features/add_listing/presentation/pages/finish_page.dart';
 import 'package:emtelek/features/add_listing/presentation/widgets/alert_dialog/city_selection_alert_dialog.dart';
 import 'package:emtelek/features/add_listing/presentation/widgets/alert_dialog/district_selection_alert_dialog.dart';
 import 'package:emtelek/features/add_listing/presentation/widgets/alert_dialog/furnished_or_unfurnished_alert_dialog.dart';
@@ -16,6 +17,7 @@ import 'package:emtelek/shared/common_pages/image_picker.dart';
 import 'package:emtelek/shared/common_pages/select_location.dart';
 import 'package:emtelek/shared/cubits/settings_cubit/settings_cubit.dart';
 import 'package:emtelek/shared/models/district-model/district_model.dart';
+import 'package:emtelek/shared/widgets/appbar_widget.dart';
 
 import 'package:emtelek/shared/widgets/button_widget.dart';
 import 'package:emtelek/shared/widgets/text_field_widget.dart';
@@ -29,6 +31,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:intl/intl.dart';
 
+/*
+
 class AddAdDetailsPage extends StatelessWidget {
   const AddAdDetailsPage({super.key});
 
@@ -37,26 +41,28 @@ class AddAdDetailsPage extends StatelessWidget {
     SettingsCubit settingsCubit = BlocProvider.of<SettingsCubit>(context);
     PropertyAddAdCubit propertyAddAdCubit =
         BlocProvider.of<PropertyAddAdCubit>(context);
-    final rentCategories = {
-      7: S.of(context).Room,
-      8: S.of(context).Apartment,
-      9: S.of(context).Shop,
-      10: S.of(context).Building,
-      11: S.of(context).Land,
-      12: S.of(context).Villa,
-      13: S.of(context).Factory,
-      22: S.of(context).Office,
-    };
 
-    final saleCategories = {
-      14: S.of(context).Apartment,
-      15: S.of(context).Shop,
-      16: S.of(context).Building,
-      17: S.of(context).Land,
-      18: S.of(context).Villa,
-      19: S.of(context).Factory,
-      23: S.of(context).Office,
-    };
+
+    return BlocConsumer<PropertyAddAdCubit, PropertyAddAdState>(
+      listener: (context, state) {
+        // TODO: implement listener
+      },
+      builder: (context, state) {
+        return Scaffold(
+
+
+
+
+
+*/
+class AddAdDetailsPage extends StatelessWidget {
+  const AddAdDetailsPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    SettingsCubit settingsCubit = BlocProvider.of<SettingsCubit>(context);
+    PropertyAddAdCubit propertyAddAdCubit =
+        BlocProvider.of<PropertyAddAdCubit>(context);
 
     return BlocConsumer<PropertyAddAdCubit, PropertyAddAdState>(
       listener: (context, state) {
@@ -69,28 +75,12 @@ class AddAdDetailsPage extends StatelessWidget {
             elevation: 2,
             surfaceTintColor: Colors.white,
             automaticallyImplyLeading: false,
-            title: Stack(
-              children: [
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: GestureDetector(
-                    child: const Icon(Icons.arrow_back_ios),
-                    onTap: () {
-                      propertyAddAdCubit.categoryForAdType = null;
-                      Navigator.pop(context);
-                    },
-                  ),
-                ),
-                const Align(
-                  alignment: Alignment.bottomCenter,
-                  child: TextWidget(
-                    text: 'أضف اعلانك',
-                    fontSize: 18,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
+            title: AppBarWidget(
+              title: S.of(context).AddYourAd,
+              onTap: () {
+                propertyAddAdCubit.categoryForAdType = null;
+                Navigator.pop(context);
+              },
             ),
             backgroundColor: AppColors.appBarBackground,
           ),
@@ -180,10 +170,11 @@ class AddAdDetailsPage extends StatelessWidget {
                           Row(
                             children: [
                               TextWidget(
-                                text: rentCategories.containsKey(
-                                        propertyAddAdCubit.categoryForAdType)
-                                    ? '${S.of(context).PropertyForRent} --> ${rentCategories[propertyAddAdCubit.categoryForAdType]} ${S.of(context).ForRent}'
-                                    : '${S.of(context).PropertyForSale} --> ${saleCategories[propertyAddAdCubit.categoryForAdType]} ${S.of(context).ForSale}',
+                                text: propertyAddAdCubit.rentCategories
+                                        .containsKey(propertyAddAdCubit
+                                            .categoryForAdType)
+                                    ? '${S.of(context).PropertyForRent} --> ${propertyAddAdCubit.rentCategories[propertyAddAdCubit.categoryForAdType]} ${S.of(context).ForRent}'
+                                    : '${S.of(context).PropertyForSale} --> ${propertyAddAdCubit.saleCategories[propertyAddAdCubit.categoryForAdType]} ${S.of(context).ForSale}',
                                 fontSize: 14,
                                 color: Colors.black,
                                 // fontWeight: FontWeight.bold,
@@ -214,8 +205,7 @@ class AddAdDetailsPage extends StatelessWidget {
                             borderColor: Colors.grey,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment
-                                  .center, // توسيط الأيقونة والنص رأسياً
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 const Icon(
                                   Icons.camera,
@@ -1071,11 +1061,7 @@ class AddAdDetailsPage extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: ButtonWidget(
                   onTap: () {
-                    propertyAddAdCubit.setPropertyField('adModelCategoryId',
-                        propertyAddAdCubit.categoryForAdType);
-                    propertyAddAdCubit.setPropertyField(
-                        'adModelCurrency', 'USD');
-                    propertyAddAdCubit.addAdPropertyFunc();
+                    Navigator.pushNamed(context, FinishPage.id);
                   },
                   text: S.of(context).Apply,
                   height: 0.06,
