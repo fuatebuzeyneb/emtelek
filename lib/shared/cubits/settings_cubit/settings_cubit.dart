@@ -247,4 +247,39 @@ class SettingsCubit extends Cubit<SettingsState> {
     );
     return city.cityName ?? S.current.undefined;
   }
+
+  Map<String, dynamic> getStatusInfo(int status) {
+    switch (status) {
+      case 1:
+        return {
+          'color': Colors.blue, // Active
+          'text': 'Active',
+        };
+      case 2:
+        return {
+          'color': Colors.grey, // Passive
+          'text': 'Passive',
+        };
+      case 3:
+        return {
+          'color': Colors.red, // Deleted
+          'text': 'Deleted',
+        };
+      case 4:
+        return {
+          'color': Colors.orange, // Archived
+          'text': 'Archived',
+        };
+      case 5:
+        return {
+          'color': Colors.yellow, // Waiting
+          'text': 'Waiting',
+        };
+      default:
+        return {
+          'color': Colors.black, // Default color for invalid status
+          'text': 'Unknown Status',
+        };
+    }
+  }
 }

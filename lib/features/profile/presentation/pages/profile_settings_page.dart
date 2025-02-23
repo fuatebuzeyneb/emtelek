@@ -6,6 +6,7 @@ import 'package:emtelek/generated/l10n.dart';
 import 'package:emtelek/shared/cubits/settings_cubit/settings_cubit.dart';
 import 'package:emtelek/shared/widgets/appbar_widget.dart';
 import 'package:emtelek/shared/widgets/button_widget.dart';
+import 'package:emtelek/shared/widgets/loading_widget.dart';
 import 'package:emtelek/shared/widgets/text_field_widget.dart';
 import 'package:emtelek/shared/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
@@ -38,11 +39,11 @@ class ProfileSettingsPage extends StatelessWidget {
           // TODO: implement listener
         },
         builder: (context, state) {
-          return state is AccountSettingsLoading
+          return state is GetAccountSettingsLoading
               ? const Center(
-                  child: CircularProgressIndicator(),
+                  child: LoadingWidget(),
                 )
-              : state is AccountSettingsFailure
+              : state is GetAccountSettingsFailure
                   ? Center(
                       child: Text(state.errorMassage),
                     )

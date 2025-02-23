@@ -240,6 +240,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "WhatWouldYouLikeToAdvertise": MessageLookupByLibrary.simpleMessage(
             "What would you like to advertise?"),
         "WhatsAppContact": MessageLookupByLibrary.simpleMessage("WhatsApp."),
+        "publishDate": MessageLookupByLibrary.simpleMessage("Publish Date"),
         "undefined": MessageLookupByLibrary.simpleMessage("undefined")
       };
 }

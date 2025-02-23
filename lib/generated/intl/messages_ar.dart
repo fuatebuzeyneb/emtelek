@@ -235,6 +235,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "WhatWouldYouLikeToAdvertise":
             MessageLookupByLibrary.simpleMessage("ما الذي ترغب بالاعلان عنه؟"),
         "WhatsAppContact": MessageLookupByLibrary.simpleMessage("الواتس اب."),
+        "publishDate": MessageLookupByLibrary.simpleMessage("تاريخ النشر"),
         "undefined": MessageLookupByLibrary.simpleMessage("غير محدد")
       };
 }

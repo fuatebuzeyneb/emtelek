@@ -50,6 +50,16 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `Publish Date`
+  String get publishDate {
+    return Intl.message(
+      'Publish Date',
+      name: 'publishDate',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Save`
   String get Save {
     return Intl.message(
