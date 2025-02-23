@@ -11,7 +11,7 @@ import 'package:emtelek/generated/l10n.dart';
 import 'package:emtelek/shared/services/cache_hekper.dart';
 import 'package:emtelek/shared/services/service_locator.dart';
 import 'package:emtelek/shared/services/shared_preferences_funs.dart';
-import 'package:emtelek/features/auth/data/models/clients_response_model.dart';
+import 'package:emtelek/shared/models/auth-and-profile-models/clients_response_model.dart';
 import 'package:get_it/get_it.dart';
 import 'package:meta/meta.dart';
 
@@ -63,8 +63,11 @@ class AuthCubit extends Cubit<AuthState> {
       saveLastName(data.data!.lastName!);
       saveClientId(data.data!.clientId!);
       savePhoneNumber(data.data!.phoneNumber!);
-      // saveAddress(data.addressData!.address!);
-      //  saveDistrictId(data.addressData!.districtId!);
+
+      if (data.addressData != null) {
+        saveAddress(data.addressData!.address!);
+        saveDistrictId(data.addressData!.districtId!);
+      }
 
       emit(SignInSuccuss());
     } on ServerException catch (e) {

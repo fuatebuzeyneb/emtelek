@@ -41,6 +41,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "AddPhotos": MessageLookupByLibrary.simpleMessage("Add Photos"),
         "AddYourAd": MessageLookupByLibrary.simpleMessage("Add Your Ad"),
         "Added": MessageLookupByLibrary.simpleMessage("Added"),
+        "Address": MessageLookupByLibrary.simpleMessage("Address"),
         "AdvertiseOnApp":
             MessageLookupByLibrary.simpleMessage("Advertise On App"),
         "Agent": MessageLookupByLibrary.simpleMessage("Agent"),
@@ -192,6 +193,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Restore Password"),
         "Room": MessageLookupByLibrary.simpleMessage("Room"),
         "Sale": MessageLookupByLibrary.simpleMessage("Sale"),
+        "Save": MessageLookupByLibrary.simpleMessage("Save"),
         "SearchFilters": MessageLookupByLibrary.simpleMessage("Search Filters"),
         "SearchForTheLocation":
             MessageLookupByLibrary.simpleMessage("Search for the location"),

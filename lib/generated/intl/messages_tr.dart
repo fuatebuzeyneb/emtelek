@@ -41,6 +41,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "AddPhotos": MessageLookupByLibrary.simpleMessage("Fotoğraf Ekle"),
         "AddYourAd": MessageLookupByLibrary.simpleMessage("İlanınızı Ekleyin"),
         "Added": MessageLookupByLibrary.simpleMessage("Eklendi"),
+        "Address": MessageLookupByLibrary.simpleMessage("Adres"),
         "AdvertiseOnApp":
             MessageLookupByLibrary.simpleMessage("Uygulamada Reklam Verin"),
         "Agent": MessageLookupByLibrary.simpleMessage("Emlakçı"),
@@ -195,6 +196,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Şifreyi Yenile"),
         "Room": MessageLookupByLibrary.simpleMessage("Oda"),
         "Sale": MessageLookupByLibrary.simpleMessage("Satılık"),
+        "Save": MessageLookupByLibrary.simpleMessage("Kaydet"),
         "SearchFilters":
             MessageLookupByLibrary.simpleMessage("Arama Filtreleri"),
         "SearchForTheLocation":

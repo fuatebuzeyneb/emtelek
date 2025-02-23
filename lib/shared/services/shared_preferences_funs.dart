@@ -41,6 +41,10 @@ void saveDistrictId(int value) {
   getIt<CacheHelper>().saveData(key: 'districtId', value: value);
 }
 
+void saveUserImage(int value) {
+  getIt<CacheHelper>().saveData(key: 'userImage', value: value);
+}
+
 void saveCurrencyCode(String value) {
   getIt<CacheHelper>().saveData(key: 'currencyCode', value: value);
 }

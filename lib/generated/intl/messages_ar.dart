@@ -41,6 +41,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "AddPhotos": MessageLookupByLibrary.simpleMessage("أضف الصور"),
         "AddYourAd": MessageLookupByLibrary.simpleMessage("أضف اعلانك"),
         "Added": MessageLookupByLibrary.simpleMessage("تم اضافته"),
+        "Address": MessageLookupByLibrary.simpleMessage("العنوان"),
         "AdvertiseOnApp":
             MessageLookupByLibrary.simpleMessage("الاعلان على إمْتَلك"),
         "Agent": MessageLookupByLibrary.simpleMessage("وكيل"),
@@ -189,6 +190,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("اعادة تعيين كلمة المرور"),
         "Room": MessageLookupByLibrary.simpleMessage("غرفة"),
         "Sale": MessageLookupByLibrary.simpleMessage("بيع"),
+        "Save": MessageLookupByLibrary.simpleMessage("حفظ"),
         "SearchFilters": MessageLookupByLibrary.simpleMessage("فلاتر البحث"),
         "SearchForTheLocation":
             MessageLookupByLibrary.simpleMessage("ابحث عن الموقع"),

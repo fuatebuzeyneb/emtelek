@@ -1,6 +1,6 @@
 import 'package:emtelek/core/api/api_consumer.dart';
 import 'package:emtelek/core/api/end_points.dart';
-import 'package:emtelek/features/auth/data/models/clients_response_model.dart';
+import 'package:emtelek/shared/models/auth-and-profile-models/clients_response_model.dart';
 import 'package:emtelek/shared/services/cache_hekper.dart';
 import 'package:emtelek/shared/services/service_locator.dart';
 import 'package:firebase_auth/firebase_auth.dart';

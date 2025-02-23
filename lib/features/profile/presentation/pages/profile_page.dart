@@ -1,6 +1,9 @@
 import 'package:emtelek/core/extensions/media_query_extensions.dart';
 import 'package:emtelek/core/extensions/sized_box_extensions.dart';
+import 'package:emtelek/core/utils/page_transitions.dart';
 import 'package:emtelek/features/auth/domain/auth_cubit/auth_cubit.dart';
+import 'package:emtelek/features/profile/domain/cubit/profile_cubit.dart';
+import 'package:emtelek/features/profile/presentation/pages/profile_settings_page.dart';
 import 'package:emtelek/generated/l10n.dart';
 import 'package:emtelek/shared/services/cache_hekper.dart';
 import 'package:emtelek/shared/services/service_locator.dart';
@@ -219,24 +222,32 @@ class ProfilePage extends StatelessWidget {
                     ],
                   ),
                   20.toHeight,
-                  LitsTitleWidget(
-                    image: 'assets/icons/setting.png',
-                    title: S.of(context).AccountSettings,
-                  ),
-                  LitsTitleWidget(
-                    image: 'assets/icons/notification.png',
-                    title: S.of(context).NotificationPreferences,
-                  ),
+                  getIt<CacheHelper>().getDataString(key: 'token') == null
+                      ? const SizedBox()
+                      : LitsTitleWidget(
+                          image: 'assets/icons/setting.png',
+                          title: S.of(context).AccountSettings,
+                          onTap: () {
+                            BlocProvider.of<ProfileCubit>(context)
+                                .getAccountSettings();
+                            pageTransition(context,
+                                page: const ProfileSettingsPage());
+                          },
+                        ),
+                  getIt<CacheHelper>().getDataString(key: 'token') == null
+                      ? const SizedBox()
+                      : LitsTitleWidget(
+                          image: 'assets/icons/notification.png',
+                          title: S.of(context).NotificationPreferences,
+                        ),
                   LitsTitleWidget(
                     image: 'assets/icons/arabic.png',
                     title: S.of(context).Language,
                     onTap: () {
                       showModalBottomSheet(
                         context: context,
-                        isScrollControlled:
-                            true, // يسمح بالتحكم الكامل في الطول
+                        isScrollControlled: true,
                         enableDrag: false,
-
                         builder: (context) {
                           return const LanguageBottomSheet();
                         },

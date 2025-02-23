@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
+import 'package:emtelek/generated/l10n.dart';
 import 'package:emtelek/shared/services/cache_hekper.dart';
 import 'package:emtelek/shared/services/service_locator.dart';
 import 'package:emtelek/shared/services/shared_preferences_funs.dart';
@@ -215,5 +216,35 @@ class SettingsCubit extends Cubit<SettingsState> {
     double latitude = double.parse(coordinates[0].trim());
     double longitude = double.parse(coordinates[1].trim());
     return LatLng(latitude, longitude);
+  }
+
+  String getCityNameByDistrictId(int districtId) {
+    // ابحث عن المدينة باستخدام CityId بناءً على DistrictId
+    for (var district in globalDistricts) {
+      if (district.districtId == districtId) {
+        // ابحث عن المدينة بناءً على CityId
+        var city = globalCities.firstWhere(
+          (city) => city.cityId == district.cityId,
+        );
+        return city.cityName ?? S.current.undefined;
+      }
+    }
+    return S.current.undefined;
+  }
+
+  String getDistrictNameByDistrictId(int districtId) {
+    // ابحث عن المنطقة باستخدام DistrictId
+    var district = globalDistricts.firstWhere(
+      (district) => district.districtId == districtId,
+    );
+    return district.districtName ?? S.current.undefined;
+  }
+
+  String getCityNameByCityId(int cityId) {
+    // ابحث عن المدينة باستخدام CityId
+    var city = globalCities.firstWhere(
+      (city) => city.cityId == cityId,
+    );
+    return city.cityName ?? S.current.undefined;
   }
 }
