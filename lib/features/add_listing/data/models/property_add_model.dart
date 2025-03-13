@@ -1,7 +1,7 @@
 import 'package:emtelek/shared/models/add-ads-models/ad_model.dart';
 
 class PropertyAdModel {
-  AdModel adModel;
+  AddAdModel adModel;
   int? totalArea;
   int? netOrBuildingArea;
   int? roomCount;
@@ -29,7 +29,7 @@ class PropertyAdModel {
 
   factory PropertyAdModel.fromJson(Map<String, dynamic> json) {
     return PropertyAdModel(
-      adModel: AdModel.fromJson(json),
+      adModel: AddAdModel.fromJson(json),
       totalArea: json["totalArea"],
       netOrBuildingArea: json["netOrBuildingArea"],
       roomCount: json["roomCount"],

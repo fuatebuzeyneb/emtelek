@@ -282,4 +282,39 @@ class SettingsCubit extends Cubit<SettingsState> {
         };
     }
   }
+
+  String? getCategoryName(int categoryId) {
+    List<Map<String, dynamic>> categories = [
+      {"CategoryId": 7, "CategoryName": S.current.Apartment},
+      {"CategoryId": 8, "CategoryName": S.current.Room},
+      {"CategoryId": 9, "CategoryName": S.current.Shop},
+      {"CategoryId": 10, "CategoryName": S.current.Building},
+      {"CategoryId": 11, "CategoryName": S.current.Land},
+      {"CategoryId": 12, "CategoryName": S.current.Villa},
+      {"CategoryId": 13, "CategoryName": S.current.Factory},
+      {"CategoryId": 14, "CategoryName": S.current.Apartment},
+      {"CategoryId": 15, "CategoryName": S.current.Shop},
+      {"CategoryId": 16, "CategoryName": S.current.Building},
+      {"CategoryId": 17, "CategoryName": S.current.Land},
+      {"CategoryId": 18, "CategoryName": S.current.Villa},
+      {"CategoryId": 19, "CategoryName": S.current.Factory},
+      {"CategoryId": 26, "CategoryName": S.current.Office},
+      {"CategoryId": 27, "CategoryName": S.current.Office},
+    ];
+
+    var category = categories.firstWhere(
+      (cat) => cat['CategoryId'] == categoryId,
+      orElse: () => {"CategoryName": null},
+    );
+
+    return category['CategoryName'];
+  }
+
+  String isForSale(int categoryId) {
+    List<int> saleCategories = [14, 15, 16, 17, 18, 19, 27];
+
+    return saleCategories.contains(categoryId)
+        ? S.current.Sale
+        : S.current.Rent;
+  }
 }

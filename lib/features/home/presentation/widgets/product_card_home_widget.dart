@@ -20,7 +20,7 @@ class ProductCardHomeWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: GestureDetector(
         onTap: () {
-          pageTransition(context, page: const PropertyDetailsPage());
+          pageTransition(context, page: PropertyDetailsPage());
         },
         child: Container(
           height: context.height * 0.22,

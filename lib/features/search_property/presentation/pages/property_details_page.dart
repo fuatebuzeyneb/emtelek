@@ -3,9 +3,12 @@ import 'dart:ui';
 import 'package:emtelek/core/extensions/alignment_extension.dart';
 import 'package:emtelek/core/extensions/media_query_extensions.dart';
 import 'package:emtelek/core/extensions/sized_box_extensions.dart';
+import 'package:emtelek/features/profile/data/models/ads_model.dart';
 import 'package:emtelek/generated/l10n.dart';
 import 'package:emtelek/core/utils/page_transitions.dart';
+import 'package:emtelek/shared/cubits/ad_details_cubit/ad_details_cubit.dart';
 import 'package:emtelek/shared/cubits/settings_cubit/settings_cubit.dart';
+import 'package:emtelek/shared/models/add-ads-models/ad_model.dart';
 import 'package:emtelek/shared/services/cache_hekper.dart';
 import 'package:emtelek/shared/services/service_locator.dart';
 import 'package:emtelek/core/constants/app_colors.dart';
@@ -23,61 +26,42 @@ import 'package:latlong2/latlong.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class PropertyDetailsPage extends StatefulWidget {
-  const PropertyDetailsPage({super.key});
+class PropertyDetailsPage extends StatelessWidget {
+  final AdsModel? adsModel;
 
-  @override
-  State<PropertyDetailsPage> createState() => _PropertyDetailsPageState();
-}
+  PropertyDetailsPage({
+    super.key,
+    this.adsModel,
+  });
 
-class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
-  int currentPage = 0;
   final int totalImages = 8;
-  bool isExpanded = false;
-  bool showAll = false;
-  int totalFeatures = 11; // العدد الإجمالي للميزات (11 ميزة في هذه الحالة)
-  List<String> features =
-      List.generate(11, (index) => 'ميزة ${index + 1}'); // بيانات الميزات
-  Key mapKey = UniqueKey();
-  LatLng latLng = const LatLng(33.510414, 36.278336);
-  final ScrollController _scrollController = ScrollController();
-  bool showAppBar = false;
-  double scrollThreshold = 100.0; // تحديد مقدار التمرير المطلوب
 
-  @override
-  void initState() {
-    super.initState();
+  final int totalFeatures = 11;
 
-    _scrollController.addListener(() {
-      // حساب النسبة المئوية للتمرير
-      double maxScroll = _scrollController.position.maxScrollExtent;
-      double currentScroll = _scrollController.position.pixels;
+  final List<String> features =
+      List.generate(11, (index) => 'ميزة ${index + 1}');
 
-      // حساب النسبة المئوية
-      double scrollPercentage = currentScroll / maxScroll;
+  final Key mapKey = UniqueKey();
 
-      // طباعة النسبة المئوية للتمرير
-      if (scrollPercentage > 0.3) {
-        setState(() {
-          showAppBar = true;
-        });
-      } else if (scrollPercentage < 0.3) {
-        setState(() {
-          showAppBar = false;
-        });
-      }
-    });
-  }
+  final ScrollController scrollController = ScrollController();
 
-  @override
-  void dispose() {
-    super.dispose();
-    _scrollController.dispose(); // لا تنسى التخلص من المراقب بعد الانتهاء
-  }
+  final List<String> imageUrls = [
+    'assets/images/example.png',
+    'assets/images/example1.webp',
+    'assets/images/example2.webp',
+    'assets/images/example3.webp',
+    'assets/images/example.png',
+    'assets/images/example1.webp',
+    'assets/images/example2.webp',
+    'assets/images/example3.webp',
+  ];
 
   @override
   Widget build(BuildContext context) {
     SettingsCubit settingsCubit = BlocProvider.of<SettingsCubit>(context);
+    AdDetailsCubit adDetailsCubit = BlocProvider.of<AdDetailsCubit>(context);
+    adDetailsCubit.showAppBarFunction(scrollController);
+
     // Alignment alignment =
     //     getIt<CacheHelper>().getDataString(key: 'Lang') == 'ar'
     //         ? Alignment.centerRight
@@ -90,164 +74,141 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
             children: [
               Expanded(
                 child: SingleChildScrollView(
-                  controller:
-                      _scrollController, // ربط المراقب بـ SingleChildScrollView
+                  controller: scrollController,
                   child: Column(
                     children: [
-                      Stack(
-                        clipBehavior: Clip.none,
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              pageTransition(context,
-                                  page: const ImageGalleryPage());
-                            },
-                            child: SizedBox(
-                              height: context.height * 0.34,
-                              child: ImageSlideshow(
-                                indicatorColor: AppColors.primary,
-                                onPageChanged: (value) {
-                                  setState(() {
-                                    currentPage = value;
-                                  });
+                      BlocBuilder<AdDetailsCubit, AdDetailsState>(
+                        builder: (context, state) {
+                          return Stack(
+                            clipBehavior: Clip.none,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  pageTransition(context,
+                                      page: const ImageGalleryPage());
                                 },
-                                children: [
-                                  Image.asset(
-                                    'assets/images/example.png',
-                                    fit: BoxFit.cover,
-                                  ),
-                                  Image.asset(
-                                    'assets/images/example1.webp',
-                                    fit: BoxFit.cover,
-                                  ),
-                                  Image.asset(
-                                    'assets/images/example2.webp',
-                                    fit: BoxFit.cover,
-                                  ),
-                                  Image.asset(
-                                    'assets/images/example3.webp',
-                                    fit: BoxFit.cover,
-                                  ),
-                                  Image.asset(
-                                    'assets/images/example.png',
-                                    fit: BoxFit.cover,
-                                  ),
-                                  Image.asset(
-                                    'assets/images/example1.webp',
-                                    fit: BoxFit.cover,
-                                  ),
-                                  Image.asset(
-                                    'assets/images/example2.webp',
-                                    fit: BoxFit.cover,
-                                  ),
-                                  Image.asset(
-                                    'assets/images/example3.webp',
-                                    fit: BoxFit.cover,
-                                  ),
-                                ],
+                                child: SizedBox(
+                                    height: context.height * 0.34,
+                                    child: ImageSlideshow(
+                                      indicatorColor: AppColors.primary,
+                                      onPageChanged: (value) {
+                                        adDetailsCubit
+                                            .currentPageFunction(value);
+                                      },
+                                      children: imageUrls
+                                          .map(
+                                            (imageUrl) => Image.asset(
+                                              imageUrl,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          )
+                                          .toList(),
+                                    )),
                               ),
-                            ),
-                          ),
-                          Positioned(
-                            bottom: 10,
-                            right: settingsCubit.locale == 'ar' ? 16 : null,
-                            left: settingsCubit.locale == 'ar' ? null : 16,
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 8, vertical: 4),
-                              decoration: BoxDecoration(
-                                color: Colors.black.withOpacity(0.5),
-                                borderRadius: BorderRadius.circular(6),
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  const Icon(
-                                    Icons.image,
-                                    size: 16,
-                                    color: Colors.white,
+                              Positioned(
+                                bottom: 10,
+                                right: settingsCubit.locale == 'ar' ? 16 : null,
+                                left: settingsCubit.locale == 'ar' ? null : 16,
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8, vertical: 4),
+                                  decoration: BoxDecoration(
+                                    color: Colors.black.withOpacity(0.5),
+                                    borderRadius: BorderRadius.circular(6),
                                   ),
-                                  6.toWidth,
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 4),
-                                    child: TextWidget(
-                                      text: '${currentPage + 1} / $totalImages',
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      const Icon(
+                                        Icons.image,
+                                        size: 16,
+                                        color: Colors.white,
+                                      ),
+                                      6.toWidth,
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 4),
+                                        child: TextWidget(
+                                          text:
+                                              '${adDetailsCubit.currentPage + 1} / $totalImages',
+                                          color: Colors.white,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                bottom: -16,
+                                right: settingsCubit.locale == 'ar' ? null : 16,
+                                left: settingsCubit.locale == 'ar' ? 16 : null,
+                                child: Row(
+                                  children: [
+                                    ButtonWidget(
+                                      borderRadius: 18,
+                                      showElevation: true,
+                                      height: 0,
+                                      width: 0,
+                                      onTap: () {},
                                       color: Colors.white,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold,
+                                      child: const Padding(
+                                        padding: EdgeInsets.all(6.0),
+                                        child: Icon(
+                                          Icons.favorite_border,
+                                          size: 22,
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                    16.toWidth,
+                                    ButtonWidget(
+                                      borderRadius: 18,
+                                      showElevation: true,
+                                      height: 0,
+                                      width: 0,
+                                      onTap: () {},
+                                      color: Colors.white,
+                                      child: const Padding(
+                                        padding: EdgeInsets.all(6.0),
+                                        child: Icon(
+                                          Icons.share_rounded,
+                                          size: 22,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ),
-                          Positioned(
-                            bottom: -16,
-                            right: settingsCubit.locale == 'ar' ? null : 16,
-                            left: settingsCubit.locale == 'ar' ? 16 : null,
-                            child: Row(
-                              children: [
-                                ButtonWidget(
+                              Positioned(
+                                top: 42,
+                                right: settingsCubit.locale == 'ar' ? 6 : null,
+                                left: settingsCubit.locale == 'ar' ? null : 6,
+                                child: ButtonWidget(
                                   borderRadius: 18,
                                   showElevation: true,
                                   height: 0,
                                   width: 0,
-                                  onTap: () {},
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                  },
                                   color: Colors.white,
-                                  child: const Padding(
-                                    padding: EdgeInsets.all(6.0),
-                                    child: Icon(
-                                      Icons.favorite_border,
-                                      size: 22,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(4.0),
+                                    child: Center(
+                                      child: Image.asset(
+                                        'assets/icons/rightArrow.png',
+                                        height: 18,
+                                        width: 18,
+                                      ),
                                     ),
-                                  ),
-                                ),
-                                16.toWidth,
-                                ButtonWidget(
-                                  borderRadius: 18,
-                                  showElevation: true,
-                                  height: 0,
-                                  width: 0,
-                                  onTap: () {},
-                                  color: Colors.white,
-                                  child: const Padding(
-                                    padding: EdgeInsets.all(6.0),
-                                    child: Icon(
-                                      Icons.share_rounded,
-                                      size: 22,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Positioned(
-                            top: 42,
-                            right: settingsCubit.locale == 'ar' ? 6 : null,
-                            left: settingsCubit.locale == 'ar' ? null : 6,
-                            child: ButtonWidget(
-                              borderRadius: 18,
-                              showElevation: true,
-                              height: 0,
-                              width: 0,
-                              onTap: () {
-                                Navigator.pop(context);
-                              },
-                              color: Colors.white,
-                              child: Padding(
-                                padding: const EdgeInsets.all(4.0),
-                                child: Center(
-                                  child: Image.asset(
-                                    'assets/icons/rightArrow.png',
-                                    height: 18,
-                                    width: 18,
                                   ),
                                 ),
                               ),
-                            ),
-                          ),
-                        ],
+                            ],
+                          );
+                        },
                       ),
                       SizedBox(height: context.height * 0.03),
                       Padding(
@@ -258,17 +219,21 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                               alignment: context.textAlignment,
                               child: Row(
                                 children: [
-                                  const TextWidget(
+                                  TextWidget(
                                     isHaveOverflow: true,
-                                    text: '28,600,278',
+                                    text: adsModel == null
+                                        ? '0000'
+                                        : adsModel!.price.toStringAsFixed(2),
                                     fontSize: 18,
                                     color: Colors.green,
                                     fontWeight: FontWeight.bold,
                                   ),
                                   6.toWidth,
-                                  const TextWidget(
+                                  TextWidget(
                                     isHaveOverflow: true,
-                                    text: 'ل.س',
+                                    text: adsModel == null
+                                        ? 'ل.س'
+                                        : adsModel!.currency,
                                     fontSize: 18,
                                     color: Colors.green,
                                     fontWeight: FontWeight.bold,
@@ -279,9 +244,11 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                             6.toHeight,
                             Align(
                               alignment: context.textAlignment,
-                              child: const TextWidget(
+                              child: TextWidget(
                                 isHaveOverflow: true,
-                                text: 'منزل مستقل 4 غرف وصالة',
+                                text: adsModel == null
+                                    ? 'منزل مستقل 4 غرف وصالة'
+                                    : adsModel!.adTitle,
                                 fontSize: 16,
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
@@ -300,10 +267,13 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                                   ),
                                   6.toWidth,
                                   Padding(
-                                    padding: const EdgeInsets.only(top: 6),
+                                    padding: EdgeInsets.only(top: 6),
                                     child: TextWidget(
                                       isHaveOverflow: true,
-                                      text: '4 ${S.of(context).Bathroom}',
+                                      text: adsModel == null
+                                          ? '4' ' ${S.of(context).Room}'
+                                          : '${adsModel!.info.roomCount}'
+                                              ' ${S.of(context).Room}',
                                       fontSize: 14,
                                       color: Colors.black,
                                       fontWeight: FontWeight.bold,
@@ -321,7 +291,10 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                                     padding: const EdgeInsets.only(top: 6),
                                     child: TextWidget(
                                       isHaveOverflow: true,
-                                      text: '4 ${S.of(context).Bathroom}',
+                                      text: adsModel == null
+                                          ? '4' ' ${S.of(context).Bathroom}'
+                                          : '${adsModel!.info.bathroomCount}'
+                                              ' ${S.of(context).Bathroom}',
                                       fontSize: 14,
                                       color: Colors.black,
                                       fontWeight: FontWeight.bold,
@@ -335,11 +308,15 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                                     color: Colors.black,
                                   ),
                                   6.toWidth,
-                                  const Padding(
+                                  Padding(
                                     padding: EdgeInsets.only(top: 6),
                                     child: TextWidget(
                                       isHaveOverflow: true,
-                                      text: '224 متر مربع',
+                                      text: adsModel == null
+                                          ? '224'
+                                              ' ${S.of(context).SquareMeter}'
+                                          : '${adsModel!.info.totalArea}'
+                                              ' ${S.of(context).SquareMeter}',
                                       fontSize: 14,
                                       color: Colors.black,
                                       fontWeight: FontWeight.bold,
@@ -349,7 +326,7 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                               ), //حي أبو رمانة - شارع الجلاء
                             ),
                             8.toHeight,
-                            const Row(
+                            Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -361,8 +338,9 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                                 Expanded(
                                   child: TextWidget(
                                     textAlign: TextAlign.right,
-                                    text:
-                                        'شارع الجلاء ,حي أبو رمانة ,منطقة الصالحية ,مدينة دمشق',
+                                    text: adsModel == null
+                                        ? 'شارع الجلاء ,حي أبو رمانة ,منطقة الصالحية ,مدينة دمشق'
+                                        : '${adsModel!.info.address} ,${adsModel!.city.cityName} ,${adsModel!.district.districtName}',
                                     fontSize: 14,
                                     color: Colors.black,
                                     // fontWeight: FontWeight.bold,
@@ -399,8 +377,12 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                                       child: Container(
                                         alignment: context
                                             .textAlignment, // محاذاة النص إلى اليسار
-                                        child: const TextWidget(
-                                          text: 'شقة', // totalPrice!,
+                                        child: TextWidget(
+                                          text: adsModel == null
+                                              ? 'شقة'
+                                              : settingsCubit.getCategoryName(
+                                                  adsModel!
+                                                      .categoryId)!, // totalPrice!,
                                           fontSize: 14,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.black,
@@ -430,8 +412,13 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                                       child: Container(
                                         alignment: context
                                             .textAlignment, // محاذاة النص إلى اليسار
-                                        child: const TextWidget(
-                                          text: 'الايجار', // totalPrice!,
+                                        child: TextWidget(
+                                          text: adsModel == null
+                                              ? 'الايجار'
+                                              : settingsCubit.isForSale(
+                                                  adsModel!.categoryId),
+
+                                          // totalPrice!,
                                           fontSize: 14,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.black,
@@ -447,7 +434,7 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                                       child: Container(
                                         alignment: context
                                             .textAlignment, // محاذاة النص إلى اليسار
-                                        child: const TextWidget(
+                                        child: TextWidget(
                                           text:
                                               'مفروشة/غير مفروشة:', // totalPrice!,
                                           fontSize: 16,
@@ -461,8 +448,12 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                                       child: Container(
                                         alignment: context
                                             .textAlignment, // محاذاة النص إلى اليسار
-                                        child: const TextWidget(
-                                          text: 'مفروشة', // totalPrice!,
+                                        child: TextWidget(
+                                          text: adsModel == null
+                                              ? 'غير مفروشة'
+                                              : adsModel!.info.furnish == true
+                                                  ? 'مفروشة'
+                                                  : 'غير مفروشة',
                                           fontSize: 14,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.black,
@@ -491,8 +482,13 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                                       child: Container(
                                         alignment: context
                                             .textAlignment, // محاذاة النص إلى اليسار
-                                        child: const TextWidget(
-                                          text: 'مالك', // totalPrice!,
+                                        child: TextWidget(
+                                          text: adsModel == null
+                                              ? 'مالك'
+                                              : adsModel!.sellerType == 1
+                                                  ? S.current.Owner
+                                                  : S.current
+                                                      .Agent, // totalPrice!,
                                           fontSize: 14,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.black,
@@ -521,8 +517,12 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                                       child: Container(
                                         alignment: context
                                             .textAlignment, // محاذاة النص إلى اليسار
-                                        child: const TextWidget(
-                                          text: '193 متر مربع', // totalPrice!,
+                                        child: TextWidget(
+                                          text: adsModel == null
+                                              ? '224'
+                                                  ' ${S.of(context).SquareMeter}'
+                                              : '${adsModel!.info.totalArea}'
+                                                  ' ${S.of(context).SquareMeter}',
                                           fontSize: 14,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.black,
@@ -538,7 +538,7 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                                       child: Container(
                                         alignment: context
                                             .textAlignment, // محاذاة النص إلى اليسار
-                                        child: const TextWidget(
+                                        child: TextWidget(
                                           text: 'رقم الطابق:', // totalPrice!,
                                           fontSize: 16,
                                           //  fontWeight: FontWeight.bold,
@@ -551,8 +551,11 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                                       child: Container(
                                         alignment: context
                                             .textAlignment, // محاذاة النص إلى اليسار
-                                        child: const TextWidget(
-                                          text: '3', // totalPrice!,
+                                        child: TextWidget(
+                                          text: adsModel == null
+                                              ? '3'
+                                              : adsModel!.info.floorNumber
+                                                  .toString(),
                                           fontSize: 14,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.black,
@@ -581,8 +584,11 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                                       child: Container(
                                         alignment: context
                                             .textAlignment, // محاذاة النص إلى اليسار
-                                        child: const TextWidget(
-                                          text: '1', // totalPrice!,
+                                        child: TextWidget(
+                                          text: adsModel == null
+                                              ? '3'
+                                              : adsModel!.info.balconyCount
+                                                  .toString(),
                                           fontSize: 14,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.black,
@@ -611,8 +617,11 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                                       child: Container(
                                         alignment: context
                                             .textAlignment, // محاذاة النص إلى اليسار
-                                        child: const TextWidget(
-                                          text: 'بناء 1', // totalPrice!,
+                                        child: TextWidget(
+                                          text: adsModel == null
+                                              ? 'بناء 1'
+                                              : adsModel!.info.complexName
+                                                  .toString(), // totalPrice!,
                                           fontSize: 14,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.black,
@@ -641,8 +650,11 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                                       child: Container(
                                         alignment: context
                                             .textAlignment, // محاذاة النص إلى اليسار
-                                        child: const TextWidget(
-                                          text: '22/01/2025', // totalPrice!,
+                                        child: TextWidget(
+                                          text: adsModel == null
+                                              ? '2022-01-01'
+                                              : adsModel!.publishDate
+                                                  .toString(), // totalPrice!,
                                           fontSize: 14,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.black,
@@ -666,36 +678,45 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                                 ),
                               ),
                             ),
-                            TextWidget(
-                              maxLines: isExpanded
-                                  ? null
-                                  : 3, // عرض النص كاملاً إذا كان موسعاً
-                              textAlign: TextAlign.justify,
-                              text:
-                                  'شقة فاخرة تقع في قلب المدينة، تتميز بإطلالات بانورامية خلابة على الأفق. تضم ثلاث غرف نوم واسعة، وصالة مشرقة مع نوافذ كبيرة تسمح بدخول الضوء الطبيعي. المطبخ مصمم بأحدث الأجهزة والتشطيبات العصرية. تحتوي الشقة أيضًا على حمامين أنيقين مجهزين بالكامل. توفر مجمع سكني آمن مع خدمات مميزة مثل حوض سباحة، نادي رياضي، ومواقف خاصة للسيارات. تقع بالقرب من المدارس، المتاجر، والمرافق العامة، مما يجعلها مثالية للعائلات. فرصة استثمارية رائعة لمحبي الفخامة والراحة.',
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
+                            BlocBuilder<AdDetailsCubit, AdDetailsState>(
+                              builder: (context, state) {
+                                return TextWidget(
+                                  maxLines: adDetailsCubit.descriptionIsExpanded
+                                      ? null
+                                      : 3, // عرض النص كاملاً إذا كان موسعاً
+                                  textAlign: TextAlign.justify,
+                                  text: adsModel == null
+                                      ? 'شقة فاخرة تقع في قلب المدينة، تتميز بإطلالات بانورامية خلابة على الأفق. تضم ثلاث غرف نوم واسعة، وصالة مشرقة مع نوافذ كبيرة تسمح بدخول الضوء الطبيعي. المطبخ مصمم بأحدث الأجهزة والتشطيبات العصرية. تحتوي الشقة أيضًا على حمامين أنيقين مجهزين بالكامل. توفر مجمع سكني آمن مع خدمات مميزة مثل حوض سباحة، نادي رياضي، ومواقف خاصة للسيارات. تقع بالقرب من المدارس، المتاجر، والمرافق العامة، مما يجعلها مثالية للعائلات. فرصة استثمارية رائعة لمحبي الفخامة والراحة.'
+                                      : adsModel!.description.toString(),
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                );
+                              },
                             ),
                             8.toHeight,
-                            Row(
-                              children: [
-                                InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                      isExpanded =
-                                          !isExpanded; // تغيير حالة النص عند الضغط
-                                    });
-                                  },
-                                  child: TextWidget(
-                                    text:
-                                        isExpanded ? 'عرض أقل' : 'قراءة المزيد',
-                                    color: Colors.blue,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
+                            BlocBuilder<AdDetailsCubit, AdDetailsState>(
+                              builder: (context, state) {
+                                return Row(
+                                  children: [
+                                    InkWell(
+                                      onTap: () {
+                                        adDetailsCubit
+                                            .descriptionIsExpandedFunction();
+                                      },
+                                      child: TextWidget(
+                                        text:
+                                            adDetailsCubit.descriptionIsExpanded
+                                                ? 'عرض أقل'
+                                                : 'قراءة المزيد',
+                                        color: Colors.blue,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
                             ),
                             8.toHeight,
                             const Divider(),
@@ -711,95 +732,100 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                               ),
                             ),
                             8.toHeight,
-                            GridView.builder(
-                              padding: EdgeInsets.zero,
-                              shrinkWrap: true,
-                              physics:
-                                  const NeverScrollableScrollPhysics(), // إيقاف التمرير
-                              itemCount: showAll || totalFeatures <= 8
-                                  ? totalFeatures // عرض جميع الميزات إذا كانت أقل من 8 أو تم الضغط على زر "عرض المزيد"
-                                  : 9, // عرض 8 ميزات مع زر "عرض المزيد" في النهاية
-                              gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 3,
-                                crossAxisSpacing: 4,
-                                mainAxisSpacing: 10,
-                                childAspectRatio: 1.1,
-                              ),
-                              itemBuilder: (context, index) {
-                                if (index < 8 && index < totalFeatures) {
-                                  // عرض الميزات فقط إذا كانت موجودة
-                                  return ButtonWidget(
-                                    color: Colors.grey[200]!,
-                                    height: 0,
-                                    width: 0,
-                                    onTap: () {},
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        const Icon(
-                                          Icons.ac_unit_outlined,
+                            BlocBuilder<AdDetailsCubit, AdDetailsState>(
+                              builder: (context, state) {
+                                return GridView.builder(
+                                  padding: EdgeInsets.zero,
+                                  shrinkWrap: true,
+                                  physics:
+                                      const NeverScrollableScrollPhysics(), // إيقاف التمرير
+                                  itemCount: adDetailsCubit.showAllFeatures ||
+                                          totalFeatures <= 8
+                                      ? totalFeatures // عرض جميع الميزات إذا كانت أقل من 8 أو تم الضغط على زر "عرض المزيد"
+                                      : 9, // عرض 8 ميزات مع زر "عرض المزيد" في النهاية
+                                  gridDelegate:
+                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 3,
+                                    crossAxisSpacing: 4,
+                                    mainAxisSpacing: 10,
+                                    childAspectRatio: 1.1,
+                                  ),
+                                  itemBuilder: (context, index) {
+                                    if (index < 8 && index < totalFeatures) {
+                                      // عرض الميزات فقط إذا كانت موجودة
+                                      return ButtonWidget(
+                                        color: Colors.grey[200]!,
+                                        height: 0,
+                                        width: 0,
+                                        onTap: () {},
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            const Icon(
+                                              Icons.ac_unit_outlined,
+                                            ),
+                                            8.toHeight,
+                                            TextWidget(
+                                              text: features[
+                                                  index], // عرض الميزات من البيانات
+                                            ),
+                                          ],
                                         ),
-                                        8.toHeight,
-                                        TextWidget(
-                                          text: features[
-                                              index], // عرض الميزات من البيانات
+                                      );
+                                    } else if (index == 8 &&
+                                        !adDetailsCubit.showAllFeatures) {
+                                      // زر "عرض المزيد" عند الـ index == 8
+                                      int remainingFeatures = totalFeatures - 8;
+                                      return ButtonWidget(
+                                        onTap: () {
+                                          adDetailsCubit
+                                              .showAllFeaturesFunction();
+                                        },
+                                        child: Column(
+                                          children: [
+                                            const Icon(
+                                              Icons.more_horiz,
+                                            ),
+                                            8.toHeight,
+                                            TextWidget(
+                                              text:
+                                                  '+$remainingFeatures مزايا إضافية',
+                                            ),
+                                          ],
                                         ),
-                                      ],
-                                    ),
-                                  );
-                                } else if (index == 8 && !showAll) {
-                                  // زر "عرض المزيد" عند الـ index == 8
-                                  int remainingFeatures = totalFeatures - 8;
-                                  return ButtonWidget(
-                                    onTap: () {
-                                      setState(() {
-                                        showAll =
-                                            !showAll; // تغيير حالة العرض عند الضغط على زر "عرض المزيد"
-                                      });
-                                    },
-                                    child: Column(
-                                      children: [
-                                        const Icon(
-                                          Icons.more_horiz,
+                                      );
+                                    } else if (index >= 8 &&
+                                        adDetailsCubit.showAllFeatures) {
+                                      // عرض الميزات المتبقية مع زر "عرض أقل"
+                                      return ButtonWidget(
+                                        color: Colors.grey[200]!,
+                                        height: 0,
+                                        width: 0,
+                                        onTap: () {},
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            const Icon(
+                                              Icons.ac_unit_outlined,
+                                            ),
+                                            8.toHeight,
+                                            TextWidget(
+                                              text: features[
+                                                  index], // عرض الميزات المتبقية من نفس البيانات
+                                            ),
+                                          ],
                                         ),
-                                        8.toHeight,
-                                        TextWidget(
-                                          text:
-                                              '+$remainingFeatures مزايا إضافية',
-                                        ),
-                                      ],
-                                    ),
-                                  );
-                                } else if (index >= 8 && showAll) {
-                                  // عرض الميزات المتبقية مع زر "عرض أقل"
-                                  return ButtonWidget(
-                                    color: Colors.grey[200]!,
-                                    height: 0,
-                                    width: 0,
-                                    onTap: () {},
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        const Icon(
-                                          Icons.ac_unit_outlined,
-                                        ),
-                                        8.toHeight,
-                                        TextWidget(
-                                          text: features[
-                                              index], // عرض الميزات المتبقية من نفس البيانات
-                                        ),
-                                      ],
-                                    ),
-                                  );
-                                }
-                                return null;
+                                      );
+                                    }
+                                    return null;
+                                  },
+                                );
                               },
                             ),
                             8.toHeight,
@@ -818,11 +844,12 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                             8.toHeight,
                             Align(
                               alignment: context.textAlignment,
-                              child: const TextWidget(
+                              child: TextWidget(
                                 // maxLines: 5,
                                 textAlign: TextAlign.right,
-                                text:
-                                    'شارع الجلاء ,حي أبو رمانة ,منطقة الصالحية ,مدينة دمشق',
+                                text: adsModel == null
+                                    ? 'شارع الجلاء ,حي أبو رمانة ,منطقة الصالحية ,مدينة دمشق'
+                                    : '${adsModel!.info.address} ,${adsModel!.city.cityName} ,${adsModel!.district.districtName}',
                                 fontSize: 14,
                                 color: Colors.black,
                                 // fontWeight: FontWeight.bold,
@@ -836,7 +863,8 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                               child: FlutterMap(
                                 key: mapKey,
                                 options: MapOptions(
-                                  initialCenter: latLng,
+                                  initialCenter: settingsCubit
+                                      .parseLatLng(adsModel!.location),
                                 ),
                                 children: [
                                   TileLayer(
@@ -847,7 +875,8 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                                   MarkerLayer(
                                     markers: [
                                       Marker(
-                                        point: latLng,
+                                        point: settingsCubit
+                                            .parseLatLng(adsModel!.location),
                                         child: const Icon(
                                           Icons.location_on,
                                           color: Colors.red,
@@ -869,7 +898,7 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                                 //  void openMaps(LatLng location) async {
                                 // تحويل النص إلى Uri
                                 final Uri url = Uri.parse(
-                                    'https://www.google.com/maps?q=${33.510414},${36.278336}');
+                                    'https://www.google.com/maps?q=${settingsCubit.parseLatLng(adsModel!.location).latitude},${settingsCubit.parseLatLng(adsModel!.location).longitude}');
 
                                 // التحقق من إمكانية فتح الرابط باستخدام canLaunchUrl
                                 if (await canLaunchUrl(url)) {
@@ -907,8 +936,10 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                                     height: 80,
                                   ),
                                   8.toHeight,
-                                  const TextWidget(
-                                    text: 'احمد عبد الرحيم',
+                                  TextWidget(
+                                    text: adsModel == null
+                                        ? 'احمد عبد الرحيم'
+                                        : '${adsModel!.client.firstName} ${adsModel!.client.lastName}',
                                     fontSize: 16,
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
@@ -1042,115 +1073,120 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
               ),
             ],
           ),
-          showAppBar == false
-              ? const SizedBox()
-              : Positioned(
-                  top: 0,
-                  child: ButtonWidget(
-                    boxShadowOpacity: 0.1,
-                    borderRadius: 0,
-                    color: Colors.white,
-                    height: 0.125,
-                    width: 1,
-                    showElevation: true,
-                    onTap: () {},
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                          left: 16.0,
-                          right: 16,
-                          top: context.height * 0.06,
-                          bottom: 8),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
+          BlocBuilder<AdDetailsCubit, AdDetailsState>(
+            builder: (context, state) {
+              return adDetailsCubit.showAppBar == false
+                  ? const SizedBox()
+                  : Positioned(
+                      top: 0,
+                      child: ButtonWidget(
+                        boxShadowOpacity: 0.1,
+                        borderRadius: 0,
+                        color: Colors.white,
+                        height: 0.125,
+                        width: 1,
+                        showElevation: true,
+                        onTap: () {},
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                              left: 16.0,
+                              right: 16,
+                              top: context.height * 0.06,
+                              bottom: 8),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.pop(context);
-                                },
-                                child: const Icon(
-                                  Icons.arrow_back_ios,
-                                  color: Colors.black,
-                                  size: 20,
-                                ),
-                              ),
-                              8.toWidth,
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
+                              Row(
                                 children: [
-                                  Row(
-                                    children: [
-                                      const TextWidget(
-                                        isHaveOverflow: true,
-                                        text: '28,600,278',
-                                        fontSize: 16,
-                                        color: Colors.green,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                      6.toWidth,
-                                      const TextWidget(
-                                        isHaveOverflow: true,
-                                        text: 'ل.س',
-                                        fontSize: 16,
-                                        color: Colors.green,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ],
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Icon(
+                                      Icons.arrow_back_ios,
+                                      color: Colors.black,
+                                      size: 20,
+                                    ),
                                   ),
-                                  2.toHeight,
-                                  Row(
+                                  8.toWidth,
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      const TextWidget(
-                                        isHaveOverflow: true,
-                                        text: '4 غرف',
-                                        fontSize: 12,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
+                                      Row(
+                                        children: [
+                                          const TextWidget(
+                                            isHaveOverflow: true,
+                                            text: '28,600,278',
+                                            fontSize: 16,
+                                            color: Colors.green,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                          6.toWidth,
+                                          const TextWidget(
+                                            isHaveOverflow: true,
+                                            text: 'ل.س',
+                                            fontSize: 16,
+                                            color: Colors.green,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ],
                                       ),
-                                      6.toWidth,
-                                      const TextWidget(
-                                        isHaveOverflow: true,
-                                        text: '2 الحمامات',
-                                        fontSize: 12,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                      6.toWidth,
-                                      const TextWidget(
-                                        isHaveOverflow: true,
-                                        text: '224 متر مربع',
-                                        fontSize: 12,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
+                                      2.toHeight,
+                                      Row(
+                                        children: [
+                                          const TextWidget(
+                                            isHaveOverflow: true,
+                                            text: '4 غرف',
+                                            fontSize: 12,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                          6.toWidth,
+                                          const TextWidget(
+                                            isHaveOverflow: true,
+                                            text: '2 الحمامات',
+                                            fontSize: 12,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                          6.toWidth,
+                                          const TextWidget(
+                                            isHaveOverflow: true,
+                                            text: '224 متر مربع',
+                                            fontSize: 12,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),
                                 ],
                               ),
+                              ButtonWidget(
+                                borderRadius: 18,
+                                showElevation: true,
+                                height: 0,
+                                width: 0,
+                                onTap: () {},
+                                color: Colors.white,
+                                child: const Padding(
+                                  padding: EdgeInsets.all(6.0),
+                                  child: Icon(
+                                    Icons.share_rounded,
+                                    size: 18,
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
-                          ButtonWidget(
-                            borderRadius: 18,
-                            showElevation: true,
-                            height: 0,
-                            width: 0,
-                            onTap: () {},
-                            color: Colors.white,
-                            child: const Padding(
-                              padding: EdgeInsets.all(6.0),
-                              child: Icon(
-                                Icons.share_rounded,
-                                size: 18,
-                              ),
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
-                    ),
-                  ),
-                ),
+                    );
+            },
+          ),
         ],
       ),
     );

@@ -1,4 +1,4 @@
-class MyAdsModel {
+class AdsModel {
   final int adId;
   final String adTitle;
   final double price;
@@ -7,12 +7,14 @@ class MyAdsModel {
   final String location;
   final String publishDate;
   final int status;
+  final int categoryId;
+  final int sellerType;
   final Client client;
   final City city;
   final District district;
   final Info info;
 
-  MyAdsModel({
+  AdsModel({
     required this.adId,
     required this.adTitle,
     required this.price,
@@ -21,14 +23,16 @@ class MyAdsModel {
     required this.location,
     required this.publishDate,
     required this.status,
+    required this.sellerType,
+    required this.categoryId,
     required this.client,
     required this.city,
     required this.district,
     required this.info,
   });
 
-  factory MyAdsModel.fromJson(Map<String, dynamic> json) {
-    return MyAdsModel(
+  factory AdsModel.fromJson(Map<String, dynamic> json) {
+    return AdsModel(
       adId: json['AdId'],
       adTitle: json['AdTitle'],
       price: double.parse(json['Price']),
@@ -37,6 +41,8 @@ class MyAdsModel {
       location: json['Location'],
       publishDate: json['PublishDate'],
       status: json['Status'],
+      sellerType: json['SellerType'],
+      categoryId: json['CategoryId'],
       client: Client.fromJson(json['data']['client']),
       city: City.fromJson(json['data']['city']),
       district: District.fromJson(json['data']['district']),
@@ -119,7 +125,7 @@ class Info {
   final int floorNumber;
   final int? floorCount;
   final int bathroomCount;
-  final String? furnish;
+  final dynamic furnish;
   final String constructionDate;
   final String address;
   final int balconyCount;

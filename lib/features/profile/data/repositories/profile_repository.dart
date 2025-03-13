@@ -1,6 +1,6 @@
 import 'package:emtelek/core/api/api_consumer.dart';
 import 'package:emtelek/core/api/end_points.dart';
-import 'package:emtelek/features/profile/data/models/my_ads_model.dart';
+import 'package:emtelek/features/profile/data/models/ads_model.dart';
 import 'package:emtelek/shared/models/auth-and-profile-models/clients_response_model.dart';
 import 'package:emtelek/features/add_listing/data/models/property_add_model.dart';
 import 'package:emtelek/shared/services/cache_hekper.dart';
@@ -10,7 +10,7 @@ import 'package:emtelek/shared/services/service_locator.dart';
 abstract class ProfileRepository {
   Future<ClientsResponseModel> getAccountSettings();
 
-  Future<List<MyAdsModel>> getMyAds();
+  Future<List<AdsModel>> getMyAds();
 }
 
 // تنفيذ الواجهة (Implementation)
@@ -39,7 +39,7 @@ class ProfileRepositoryImpl implements ProfileRepository {
   }
 
   @override
-  Future<List<MyAdsModel>> getMyAds() async {
+  Future<List<AdsModel>> getMyAds() async {
     try {
       final response = await api.post(
         '${EndPoints.baseUrl}${EndPoints.clientsMyAds}',
@@ -64,7 +64,7 @@ class ProfileRepositoryImpl implements ProfileRepository {
       }
 
       List<dynamic> adsJson = adsMap.values.toList();
-      return adsJson.map((json) => MyAdsModel.fromJson(json)).toList();
+      return adsJson.map((json) => AdsModel.fromJson(json)).toList();
       //return [];
     } catch (e) {
       print("Error in getMyAds: $e"); // طباعة الخطأ لمزيد من التحليل

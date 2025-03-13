@@ -1,6 +1,8 @@
 import 'package:emtelek/core/constants/app_colors.dart';
 import 'package:emtelek/core/extensions/sized_box_extensions.dart';
-import 'package:emtelek/features/profile/data/models/my_ads_model.dart';
+import 'package:emtelek/core/utils/page_transitions.dart';
+import 'package:emtelek/features/profile/data/models/ads_model.dart';
+import 'package:emtelek/features/search_property/presentation/pages/property_details_page.dart';
 import 'package:emtelek/generated/l10n.dart';
 import 'package:emtelek/shared/cubits/settings_cubit/settings_cubit.dart';
 import 'package:emtelek/shared/widgets/appbar_widget.dart';
@@ -13,7 +15,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MyAdCardWidget extends StatelessWidget {
   final int index;
-  final List<MyAdsModel> myAdsList;
+  final List<AdsModel> myAdsList;
   const MyAdCardWidget({
     super.key,
     required this.index,
@@ -73,12 +75,12 @@ class MyAdCardWidget extends StatelessWidget {
                   ),
                   Spacer(),
                   TextWidget(
-                    text: context.read<SettingsCubit>().getStatusInfo(
-                        myAdsList[index].status)['text'], // جلب النص من الدالة
+                    text: context
+                        .read<SettingsCubit>()
+                        .getStatusInfo(myAdsList[index].status)['text'],
                     color: context
-                            .read<SettingsCubit>()
-                            .getStatusInfo(myAdsList[index].status)[
-                        'color'], // جلب اللون من الدالة
+                        .read<SettingsCubit>()
+                        .getStatusInfo(myAdsList[index].status)['color'],
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   )
@@ -89,7 +91,12 @@ class MyAdCardWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ButtonWidget(
-                    onTap: () {},
+                    onTap: () {
+                      pageTransition(context,
+                          page: PropertyDetailsPage(
+                            adsModel: myAdsList[index],
+                          ));
+                    },
                     color: Colors.red,
                     colorText: Colors.white,
                     height: 0.05,

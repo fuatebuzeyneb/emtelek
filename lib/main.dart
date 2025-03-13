@@ -7,6 +7,7 @@ import 'package:emtelek/features/add_listing/presentation/pages/finish_page.dart
 import 'package:emtelek/features/auth/data/repositories/auth_repository.dart';
 import 'package:emtelek/features/profile/data/repositories/profile_repository.dart';
 import 'package:emtelek/features/profile/domain/cubit/profile_cubit.dart';
+import 'package:emtelek/shared/cubits/ad_details_cubit/ad_details_cubit.dart';
 import 'package:emtelek/shared/widgets/bottom_nav_bar.dart';
 import 'package:emtelek/features/auth/domain/auth_cubit/auth_cubit.dart';
 import 'package:emtelek/features/search_property/domain/property_cubit/property_cubit.dart';
@@ -64,6 +65,9 @@ class MyApp extends StatelessWidget {
           create: (context) => ProfileCubit(
             ProfileRepositoryImpl(api: DioConsumer(dio: Dio())),
           ),
+        ),
+        BlocProvider(
+          create: (context) => AdDetailsCubit(),
         ),
       ],
       child: BlocConsumer<SettingsCubit, SettingsState>(

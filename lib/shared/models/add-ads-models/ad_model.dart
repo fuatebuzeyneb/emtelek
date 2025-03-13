@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-class AdModel {
+class AddAdModel {
   String? title;
   String? description;
   double? price;
@@ -16,7 +16,7 @@ class AdModel {
   int? categoryId;
   String token;
 
-  AdModel(
+  AddAdModel(
       {required this.title,
       required this.price,
       required this.location,
@@ -32,8 +32,8 @@ class AdModel {
       required this.token,
       required this.address});
 
-  factory AdModel.fromJson(Map<String, dynamic> json) {
-    return AdModel(
+  factory AddAdModel.fromJson(Map<String, dynamic> json) {
+    return AddAdModel(
       title: json['Title'],
       price: json['Price'],
       location: json['Location'],

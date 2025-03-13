@@ -25,7 +25,7 @@ class _PropertyCardState extends State<PropertyCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        pageTransition(context, page: const PropertyDetailsPage());
+        pageTransition(context, page: PropertyDetailsPage());
       },
       child: Container(
         height: context.height * 0.51,
@@ -49,7 +49,7 @@ class _PropertyCardState extends State<PropertyCard> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    pageTransition(context, page: const PropertyDetailsPage());
+                    pageTransition(context, page: PropertyDetailsPage());
                   },
                   child: SizedBox(
                     height: context.height * 0.27,

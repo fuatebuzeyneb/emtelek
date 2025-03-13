@@ -69,7 +69,7 @@ class PropertyAddAdCubit extends Cubit<PropertyAddAdState> {
       constructionDate: null,
       furnished: null,
       complexName: null,
-      adModel: AdModel(
+      adModel: AddAdModel(
         title: null,
         price: null,
         location: null,
