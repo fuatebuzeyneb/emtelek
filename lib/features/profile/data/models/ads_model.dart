@@ -1,20 +1,22 @@
 class AdsModel {
-  final int adId;
-  final String adTitle;
-  final double price;
-  final String currency;
-  final String description;
-  final String location;
-  final String publishDate;
-  final int status;
-  final int categoryId;
-  final int sellerType;
-  final Client client;
-  final City city;
-  final District district;
-  final Info info;
+  String token;
+  int adId;
+  String adTitle;
+  double price;
+  String currency;
+  String description;
+  String location;
+  String publishDate;
+  int status;
+  int categoryId;
+  int sellerType;
+  Client client;
+  City city;
+  District district;
+  Info info;
 
   AdsModel({
+    required this.token,
     required this.adId,
     required this.adTitle,
     required this.price,
@@ -33,6 +35,7 @@ class AdsModel {
 
   factory AdsModel.fromJson(Map<String, dynamic> json) {
     return AdsModel(
+      token: json['Token'] ?? '',
       adId: json['AdId'],
       adTitle: json['AdTitle'],
       price: double.parse(json['Price']),
@@ -49,15 +52,35 @@ class AdsModel {
       info: Info.fromJson(json['data']['info']),
     );
   }
+
+  // Add toJson method
+  Map<String, dynamic> toJson() {
+    return {
+      'AdId': adId,
+      'AdTitle': adTitle,
+      'Price': price,
+      'Currency': currency,
+      'Description': description,
+      'Location': location,
+      'PublishDate': publishDate,
+      'Status': status,
+      'SellerType': sellerType,
+      'CategoryId': categoryId,
+      'Client': client.toJson(),
+      'City': city.toJson(),
+      'District': district.toJson(),
+      'Info': info.toJson(),
+    };
+  }
 }
 
 class Client {
-  final int clientId;
-  final String firstName;
-  final String lastName;
-  final String phoneNumber;
-  final String email;
-  final String subscriptionDate;
+  int clientId;
+  String firstName;
+  String lastName;
+  String phoneNumber;
+  String email;
+  String subscriptionDate;
 
   Client({
     required this.clientId,
@@ -78,11 +101,23 @@ class Client {
       subscriptionDate: json['SubscriptionDate'],
     );
   }
+
+  // Add toJson method
+  Map<String, dynamic> toJson() {
+    return {
+      'ClientId': clientId,
+      'FirstName': firstName,
+      'LastName': lastName,
+      'PhoneNumber': phoneNumber,
+      'Email': email,
+      'SubscriptionDate': subscriptionDate,
+    };
+  }
 }
 
 class City {
-  final int cityId;
-  final String cityName;
+  int cityId;
+  String cityName;
 
   City({
     required this.cityId,
@@ -95,12 +130,20 @@ class City {
       cityName: json['CityName'],
     );
   }
+
+  // Add toJson method
+  Map<String, dynamic> toJson() {
+    return {
+      'CityId': cityId,
+      'CityName': cityName,
+    };
+  }
 }
 
 class District {
-  final int districtId;
-  final int cityId;
-  final String districtName;
+  int districtId;
+  int cityId;
+  String districtName;
 
   District({
     required this.districtId,
@@ -115,26 +158,35 @@ class District {
       districtName: json['DistrictName'],
     );
   }
+
+  // Add toJson method
+  Map<String, dynamic> toJson() {
+    return {
+      'DistrictId': districtId,
+      'CityId': cityId,
+      'DistrictName': districtName,
+    };
+  }
 }
 
 class Info {
-  final int adId;
-  final int totalArea;
-  final int netArea;
-  final int roomCount;
-  final int floorNumber;
-  final int? floorCount;
-  final int bathroomCount;
-  final dynamic furnish;
-  final String constructionDate;
-  final String address;
-  final int balconyCount;
-  final String complexName;
+  int adId;
+  int totalArea;
+  int netOrBuildingArea;
+  int roomCount;
+  int floorNumber;
+  int? floorCount;
+  int bathroomCount;
+  dynamic furnish;
+  String constructionDate;
+  String address;
+  int balconyCount;
+  String complexName;
 
   Info({
     required this.adId,
     required this.totalArea,
-    required this.netArea,
+    required this.netOrBuildingArea,
     required this.roomCount,
     required this.floorNumber,
     required this.floorCount,
@@ -150,7 +202,7 @@ class Info {
     return Info(
       adId: json['AdId'],
       totalArea: json['TotalArea'],
-      netArea: json['NetArea'],
+      netOrBuildingArea: json['NetArea'],
       roomCount: json['RoomCount'] ?? 0,
       floorNumber: json['FloorNumber'] ?? 0,
       floorCount: json['FloorCount'],
@@ -161,5 +213,23 @@ class Info {
       balconyCount: json['BalconyCount'] ?? 0,
       complexName: json['ComplexName'] ?? '',
     );
+  }
+
+  // Add toJson method
+  Map<String, dynamic> toJson() {
+    return {
+      'AdId': adId,
+      'TotalArea': totalArea,
+      'NetArea': netOrBuildingArea,
+      'RoomCount': roomCount,
+      'FloorNumber': floorNumber,
+      'FloorCount': floorCount,
+      'BathroomCount': bathroomCount,
+      'Furnish': furnish,
+      'ConstructionDate': constructionDate,
+      'Address': address,
+      'BalconyCount': balconyCount,
+      'ComplexName': complexName,
+    };
   }
 }

@@ -9,6 +9,9 @@ import 'package:emtelek/shared/services/service_locator.dart';
 // تعريف الواجهة (Interface)
 abstract class MyAdsRepository {
   Future<List<AdsModel>> getMyAds();
+  Future<AdsModel> updateAdProperty({
+    required AdsModel adsModel,
+  });
 }
 
 class MyAdsRepositoryImpl implements MyAdsRepository {
@@ -48,5 +51,26 @@ class MyAdsRepositoryImpl implements MyAdsRepository {
       print("Error in getMyAds: $e"); // طباعة الخطأ لمزيد من التحليل
       throw Exception("Failed to load ads: ${e.toString()}");
     }
+  }
+
+  @override
+  Future<AdsModel> updateAdProperty({
+    required AdsModel adsModel,
+  }) async {
+    // طباعة الـ Request (البيانات التي يتم إرسالها)
+    print("🔵 Request to API: ${adsModel.toJson()}");
+
+    // إرسال الطلب عبر PUT أو PATCH (حسب الـ API الخاص بك)
+    final response = await api.post(
+      '${EndPoints.baseUrl}${EndPoints.adsEdit}', // أو حسب بنية الـ API لديك
+      isFormData: true,
+      data: adsModel.toJson(),
+    );
+
+    // طباعة الـ Response (البيانات التي تم استلامها)
+    print("🔵 Response from API: $response");
+
+    // تحويل الاستجابة إلى PropertyAdModel
+    return AdsModel.fromJson(response);
   }
 }

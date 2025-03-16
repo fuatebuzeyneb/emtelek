@@ -3,6 +3,7 @@ import 'package:emtelek/core/extensions/media_query_extensions.dart';
 import 'package:emtelek/core/extensions/sized_box_extensions.dart';
 import 'package:emtelek/core/utils/page_transitions.dart';
 import 'package:emtelek/features/add_listing/presentation/pages/add_ad_details_page.dart';
+import 'package:emtelek/features/my_ads/domain/cubit/my_ads_cubit.dart';
 import 'package:emtelek/features/profile/data/models/ads_model.dart';
 import 'package:emtelek/features/my_ads/presentation/pages/edit_ad_details_page.dart';
 import 'package:emtelek/features/search_property/presentation/pages/property_details_page.dart';
@@ -116,6 +117,8 @@ class MyAdCardWidget extends StatelessWidget {
                 children: [
                   ButtonWidget(
                     onTap: () {
+                      BlocProvider.of<MyAdsCubit>(context)
+                          .setEditIndex(index: index);
                       pageTransition(context,
                           page: EditAdDetailsPage(
                             indexForEdit: index,

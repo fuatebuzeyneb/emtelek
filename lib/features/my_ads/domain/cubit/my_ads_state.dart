@@ -14,3 +14,13 @@ final class GetMyAdsFailure extends MyAdsState {
 
   GetMyAdsFailure({required this.errorMassage});
 }
+
+final class PropertyUpdateAdLoading extends MyAdsState {}
+
+final class PropertyUpdateAdSuccess extends MyAdsState {}
+
+final class PropertyUpdateAdFailure extends MyAdsState {
+  final String errorMassage;
+
+  PropertyUpdateAdFailure({required this.errorMassage});
+}

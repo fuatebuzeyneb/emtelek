@@ -7,6 +7,7 @@ import 'package:emtelek/features/home/presentation/pages/home_page.dart';
 import 'package:emtelek/features/profile/presentation/pages/profile_page.dart';
 import 'package:emtelek/features/add_listing/presentation/widgets/bottom_sheets/add_ad_bottom_sheet.dart';
 import 'package:emtelek/features/auth/presentation/widgets/bottom_sheets/login_options_bottom_sheet.dart';
+import 'package:emtelek/shared/cubits/settings_cubit/settings_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,6 +21,13 @@ class BottomNavBar extends StatefulWidget {
 
 class _BottomNavBarState extends State<BottomNavBar> {
   int currentIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<SettingsCubit>(context)
+        .initCategories(); // ✅ يتم استدعاؤها مرة واحدة فقط
+  }
 
   @override
   void didChangeDependencies() {
