@@ -2,8 +2,9 @@ import 'package:emtelek/core/extensions/media_query_extensions.dart';
 import 'package:emtelek/core/extensions/sized_box_extensions.dart';
 import 'package:emtelek/core/utils/page_transitions.dart';
 import 'package:emtelek/features/auth/domain/auth_cubit/auth_cubit.dart';
+import 'package:emtelek/features/my_ads/domain/cubit/my_ads_cubit.dart';
 import 'package:emtelek/features/profile/domain/cubit/profile_cubit.dart';
-import 'package:emtelek/features/profile/presentation/pages/my_ads_page.dart';
+import 'package:emtelek/features/my_ads/presentation/pages/my_ads_page.dart';
 import 'package:emtelek/features/profile/presentation/pages/profile_settings_page.dart';
 import 'package:emtelek/generated/l10n.dart';
 import 'package:emtelek/shared/services/cache_hekper.dart';
@@ -175,7 +176,7 @@ class ProfilePage extends StatelessWidget {
                         color: Colors.white,
                         showElevation: true,
                         onTap: () {
-                          BlocProvider.of<ProfileCubit>(context).getMyAds();
+                          BlocProvider.of<MyAdsCubit>(context).getMyAds();
                           pageTransition(context, page: const MyAdsPage());
                         },
                         height: 0.1,

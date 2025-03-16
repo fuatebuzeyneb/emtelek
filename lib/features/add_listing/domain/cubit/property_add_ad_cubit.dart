@@ -21,27 +21,6 @@ class PropertyAddAdCubit extends Cubit<PropertyAddAdState> {
   // 6--> Property for buy
 // 5--> Property for rent
 
-  final Map<int, String> rentCategories = {
-    7: S.current.Room,
-    8: S.current.Apartment,
-    9: S.current.Shop,
-    10: S.current.Building,
-    11: S.current.Land,
-    12: S.current.Villa,
-    13: S.current.Factory,
-    22: S.current.Office,
-  };
-
-  final Map<int, String> saleCategories = {
-    14: S.current.Apartment,
-    15: S.current.Shop,
-    16: S.current.Building,
-    17: S.current.Land,
-    18: S.current.Villa,
-    19: S.current.Factory,
-    23: S.current.Office,
-  };
-
   int? categoryForAdType;
 
   void changeCategoryForAdType(int type) {

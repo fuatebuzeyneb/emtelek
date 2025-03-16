@@ -11,6 +11,7 @@ import 'package:emtelek/features/add_listing/presentation/widgets/alert_dialog/f
 
 import 'package:emtelek/features/add_listing/presentation/widgets/alert_dialog/number_selection_alert_dialog.dart';
 import 'package:emtelek/features/add_listing/presentation/widgets/alert_dialog/seller_type_alert_dialog.dart';
+import 'package:emtelek/features/profile/domain/cubit/profile_cubit.dart';
 import 'package:emtelek/generated/l10n.dart';
 import 'package:emtelek/core/constants/app_colors.dart';
 import 'package:emtelek/shared/common_pages/image_picker.dart';
@@ -56,7 +57,9 @@ class AddAdDetailsPage extends StatelessWidget {
 
 */
 class AddAdDetailsPage extends StatelessWidget {
-  const AddAdDetailsPage({super.key});
+  const AddAdDetailsPage({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -170,11 +173,10 @@ class AddAdDetailsPage extends StatelessWidget {
                           Row(
                             children: [
                               TextWidget(
-                                text: propertyAddAdCubit.rentCategories
-                                        .containsKey(propertyAddAdCubit
-                                            .categoryForAdType)
-                                    ? '${S.of(context).PropertyForRent} --> ${propertyAddAdCubit.rentCategories[propertyAddAdCubit.categoryForAdType]} ${S.of(context).ForRent}'
-                                    : '${S.of(context).PropertyForSale} --> ${propertyAddAdCubit.saleCategories[propertyAddAdCubit.categoryForAdType]} ${S.of(context).ForSale}',
+                                text: settingsCubit.rentCategories.containsKey(
+                                        propertyAddAdCubit.categoryForAdType)
+                                    ? '${S.of(context).PropertyForRent} --> ${settingsCubit.rentCategories[propertyAddAdCubit.categoryForAdType]} ${S.of(context).ForRent}'
+                                    : '${S.of(context).PropertyForSale} --> ${settingsCubit.saleCategories[propertyAddAdCubit.categoryForAdType]} ${S.of(context).ForSale}',
                                 fontSize: 14,
                                 color: Colors.black,
                                 // fontWeight: FontWeight.bold,

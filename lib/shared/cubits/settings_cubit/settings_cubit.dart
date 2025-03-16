@@ -20,6 +20,34 @@ part 'settings_state.dart';
 class SettingsCubit extends Cubit<SettingsState> {
   SettingsCubit() : super(SettingsInitial());
 
+  late Map<int, String> rentCategories;
+  late Map<int, String> saleCategories;
+
+  void initCategories() {
+    rentCategories = {
+      7: S.current.Room,
+      8: S.current.Apartment,
+      9: S.current.Shop,
+      10: S.current.Building,
+      11: S.current.Land,
+      12: S.current.Villa,
+      13: S.current.Factory,
+      22: S.current.Office,
+    };
+
+    saleCategories = {
+      14: S.current.Apartment,
+      15: S.current.Shop,
+      16: S.current.Building,
+      17: S.current.Land,
+      18: S.current.Villa,
+      19: S.current.Factory,
+      23: S.current.Office,
+    };
+
+    emit(SettingsInitial());
+  }
+
   //---------------------------------------language---------------------------
 
   String locale = getIt<CacheHelper>().getDataString(key: 'Lang') ?? 'ar';

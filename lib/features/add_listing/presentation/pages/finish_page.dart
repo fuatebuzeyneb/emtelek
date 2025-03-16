@@ -53,10 +53,10 @@ class FinishPage extends StatelessWidget {
                             fontSize: 18,
                             color: Colors.black),
                         TextWidget(
-                          text: propertyAddAdCubit.rentCategories.containsKey(
+                          text: settingsCubit.rentCategories.containsKey(
                                   propertyAddAdCubit.categoryForAdType)
-                              ? ' ${S.of(context).PropertyForRent} --> ${propertyAddAdCubit.rentCategories[propertyAddAdCubit.categoryForAdType]} ${S.of(context).ForRent}'
-                              : ' ${S.of(context).PropertyForSale} --> ${propertyAddAdCubit.saleCategories[propertyAddAdCubit.categoryForAdType]} ${S.of(context).ForSale}',
+                              ? ' ${S.of(context).PropertyForRent} --> ${settingsCubit.rentCategories[propertyAddAdCubit.categoryForAdType]} ${S.of(context).ForRent}'
+                              : ' ${S.of(context).PropertyForSale} --> ${settingsCubit.saleCategories[propertyAddAdCubit.categoryForAdType]} ${S.of(context).ForSale}',
                           fontSize: 14,
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
