@@ -3,7 +3,7 @@ import 'package:emtelek/core/errors/exceptions.dart';
 import 'package:emtelek/features/add_listing/data/models/property_add_model.dart';
 import 'package:emtelek/features/my_ads/data/repositories/my_ads_repository.dart';
 import 'package:emtelek/features/profile/data/models/ads_model.dart';
-import 'package:emtelek/shared/models/add-ads-models/ad_model.dart';
+import 'package:emtelek/shared/models/add-ads-models/add_ad_model.dart';
 import 'package:emtelek/shared/services/cache_hekper.dart';
 import 'package:emtelek/shared/services/service_locator.dart';
 import 'package:intl/intl.dart';

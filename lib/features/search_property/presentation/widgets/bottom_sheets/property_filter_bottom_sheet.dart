@@ -753,7 +753,7 @@ class PropertyFilterBottomSheet extends StatelessWidget {
                               propertyCubit.changePostedByType(0);
                             },
                             color: Colors.white,
-                            borderColor: propertyCubit.postedByType == 0
+                            borderColor: propertyCubit.sellerType == 0
                                 ? AppColors.primary
                                 : Colors.black26,
                             child: Row(
@@ -763,7 +763,7 @@ class PropertyFilterBottomSheet extends StatelessWidget {
                                   padding: const EdgeInsets.only(top: 4),
                                   child: TextWidget(
                                     text: S.of(context).All,
-                                    color: propertyCubit.postedByType == 0
+                                    color: propertyCubit.sellerType == 0
                                         ? AppColors.primary
                                         : Colors.black,
                                     fontSize: 14,
@@ -783,7 +783,7 @@ class PropertyFilterBottomSheet extends StatelessWidget {
                               propertyCubit.changePostedByType(1);
                             },
                             color: Colors.white,
-                            borderColor: propertyCubit.postedByType == 1
+                            borderColor: propertyCubit.sellerType == 1
                                 ? AppColors.primary
                                 : Colors.black26,
                             child: Row(
@@ -793,7 +793,7 @@ class PropertyFilterBottomSheet extends StatelessWidget {
                                   padding: const EdgeInsets.only(top: 4),
                                   child: TextWidget(
                                     text: S.of(context).Owner,
-                                    color: propertyCubit.postedByType == 1
+                                    color: propertyCubit.sellerType == 1
                                         ? AppColors.primary
                                         : Colors.black,
                                     fontSize: 14,
@@ -813,7 +813,7 @@ class PropertyFilterBottomSheet extends StatelessWidget {
                               propertyCubit.changePostedByType(2);
                             },
                             color: Colors.white,
-                            borderColor: propertyCubit.postedByType == 2
+                            borderColor: propertyCubit.sellerType == 2
                                 ? AppColors.primary
                                 : Colors.black26,
                             child: Row(
@@ -823,7 +823,7 @@ class PropertyFilterBottomSheet extends StatelessWidget {
                                   padding: const EdgeInsets.only(top: 4),
                                   child: TextWidget(
                                     text: S.of(context).Agent,
-                                    color: propertyCubit.postedByType == 2
+                                    color: propertyCubit.sellerType == 2
                                         ? AppColors.primary
                                         : Colors.black,
                                     fontSize: 14,
@@ -921,6 +921,7 @@ class PropertyFilterBottomSheet extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: ButtonWidget(
                     onTap: () {
+                      //  propertyCubit.applyFilter();
                       pageTransition(context,
                           page: const PropertySearchResultPage());
                     },

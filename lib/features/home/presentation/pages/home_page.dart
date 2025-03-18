@@ -1,5 +1,6 @@
 import 'package:emtelek/core/extensions/media_query_extensions.dart';
 import 'package:emtelek/core/extensions/sized_box_extensions.dart';
+import 'package:emtelek/features/home/domain/cubit/home_cubit.dart';
 import 'package:emtelek/features/search_property/domain/property_cubit/property_cubit.dart';
 import 'package:emtelek/shared/cubits/settings_cubit/settings_cubit.dart';
 import 'package:emtelek/generated/l10n.dart';
@@ -20,7 +21,8 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     PropertyCubit propertyCubit = BlocProvider.of<PropertyCubit>(context);
-    propertyCubit.updateIconsAndTexts(
+    HomeCubit homeCubit = BlocProvider.of<HomeCubit>(context);
+    homeCubit.updateIconsAndTexts(
       findHomeText: S.of(context).FindHome,
       findCarText: S.of(context).FindCar,
       findOfficeText:
@@ -67,7 +69,7 @@ class HomePage extends StatelessWidget {
       },
     ];
     BlocProvider.of<SettingsCubit>(context).openBox();
-    propertyCubit.startTimer();
+    homeCubit.startTimer();
     return BlocConsumer<PropertyCubit, PropertyState>(
       listener: (context, state) {},
       builder: (context, state) {
@@ -94,7 +96,7 @@ class HomePage extends StatelessWidget {
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            key: ValueKey<int>(propertyCubit.currentIndex),
+                            key: ValueKey<int>(homeCubit.currentIndex),
                             children: [
                               SizedBox(
                                 height: context.height * 0.06,
@@ -103,14 +105,13 @@ class HomePage extends StatelessWidget {
                                   prefixIcon: Padding(
                                     padding: const EdgeInsets.all(10.0),
                                     child: Image.asset(
-                                      propertyCubit.currentIconAndText['image'],
+                                      homeCubit.currentIconAndText['image'],
                                       color: Colors.grey,
                                       height: 5,
                                       width: 5,
                                     ),
                                   ),
-                                  hint:
-                                      propertyCubit.currentIconAndText['text'],
+                                  hint: homeCubit.currentIconAndText['text'],
                                   borderRadius: 28,
                                 ),
                               ),

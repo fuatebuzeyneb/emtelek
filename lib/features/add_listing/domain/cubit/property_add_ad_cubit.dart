@@ -5,7 +5,7 @@ import 'package:emtelek/core/errors/exceptions.dart';
 import 'package:emtelek/features/add_listing/data/models/property_add_model.dart';
 import 'package:emtelek/features/add_listing/data/repositories/property_repository.dart';
 import 'package:emtelek/generated/l10n.dart';
-import 'package:emtelek/shared/models/add-ads-models/ad_model.dart';
+import 'package:emtelek/shared/models/add-ads-models/add_ad_model.dart';
 import 'package:emtelek/shared/models/district-model/district_model.dart';
 import 'package:emtelek/shared/services/cache_hekper.dart';
 import 'package:emtelek/shared/services/service_locator.dart';

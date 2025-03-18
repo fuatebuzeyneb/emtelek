@@ -22,13 +22,17 @@ class MyAdsRepositoryImpl implements MyAdsRepository {
   @override
   Future<List<AdsModel>> getMyAds() async {
     try {
+      final data = {
+        "Token": getIt<CacheHelper>().getDataString(key: 'token'),
+        "ClientId": getIt<CacheHelper>().getData(key: 'clientId'),
+      };
+
+      print("Data being sent: $data");
+
       final response = await api.post(
         '${EndPoints.baseUrl}${EndPoints.clientsMyAds}',
         isFormData: true,
-        data: {
-          "Token": getIt<CacheHelper>().getDataString(key: 'token'),
-          "ClientId": getIt<CacheHelper>().getData(key: 'clientId'),
-        },
+        data: data,
       );
 
       print("Response: $response"); // طباعة الاستجابة للتحقق

@@ -1,6 +1,9 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:emtelek/features/profile/data/models/ads_model.dart';
+import 'package:emtelek/features/search_property/data/models/property_filter_mode.dart';
+import 'package:emtelek/features/search_property/data/repositories/search_property_repository.dart';
 import 'package:emtelek/generated/l10n.dart';
 import 'package:emtelek/shared/models/city-model/city_model.dart';
 import 'package:emtelek/shared/models/district-model/district_model.dart';
@@ -10,7 +13,8 @@ import 'package:meta/meta.dart';
 part 'property_state.dart';
 
 class PropertyCubit extends Cubit<PropertyState> {
-  PropertyCubit() : super(PropertyInitial());
+  final SearchPropertyRepository searchPropertyRepository;
+  PropertyCubit(this.searchPropertyRepository) : super(PropertyInitial());
 
 //***********************************for filter*******************************
 
@@ -213,55 +217,52 @@ class PropertyCubit extends Cubit<PropertyState> {
 // 1--> owner
 // 2--> agent
 
-  int postedByType = 0;
+  int sellerType = 0;
 
   changePostedByType(int type) {
-    postedByType = type;
+    sellerType = type;
     emit(PropertyInitial());
   }
 
 //***********************************for home*******************************
 
-//-------------------------for home search----------------------
+  //***********************************for get property*******************************
 
-  int currentIndex = 0;
-  late Map<String, dynamic> currentIconAndText;
+  List<AdsModel> filteredAds = [];
+  Future<void> applyFilter() async {
+    try {
+      filteredAds = await searchPropertyRepository.getFilteredAds(
+        PropertyFilterModel(
+          categoryId: 14,
+          sellerType: null,
+          roomCount: null,
+          furnish: null,
+          cityId: null,
+          districtId: null,
+          bathroomCount: null,
+          minPrice: null,
+          maxPrice: null,
+          minTotalArea: null,
+          maxTotalArea: null,
+          minNetArea: null,
+          maxNetArea: null,
+          floorCount: null,
+          minConstructionDate: null,
+          maxConstructionDate: null,
+          balconyCount: null,
+        ),
+      );
 
-  List<Map<String, dynamic>> iconsAndTexts = [];
-
-  void updateIconsAndTexts(
-      {required String findHomeText,
-      required String findCarText,
-      required String findOfficeText,
-      required String findLandText}) {
-    iconsAndTexts = [
-      {'image': 'assets/icons/home.png', 'text': findHomeText},
-      {'image': 'assets/icons/car.png', 'text': findCarText},
-      {'image': 'assets/icons/office.png', 'text': findOfficeText},
-      {'image': 'assets/icons/land.png', 'text': findLandText},
-    ];
-    currentIconAndText = iconsAndTexts[currentIndex];
+      // ✅ طباعة منظمة لنتائج الفلتر
+      if (filteredAds.isNotEmpty) {
+        for (var ad in filteredAds) {
+          print('✅ Ad: ${ad.toJson()}');
+        }
+      } else {
+        print('🚫 No ads found!');
+      }
+    } catch (e) {
+      print('❌ Error loading filtered ads: $e');
+    }
   }
-
-  Timer? _timer;
-
-  // بدء الـ Timer لتغيير الأيقونة والنص
-  void startTimer() {
-    _timer = Timer.periodic(const Duration(seconds: 7), _updateTextAndIcon);
-  }
-
-  // تحديث الأيقونة والنص عند مرور الوقت
-  void _updateTextAndIcon(Timer timer) {
-    currentIndex = (currentIndex + 1) % iconsAndTexts.length;
-    currentIconAndText = iconsAndTexts[currentIndex];
-    emit(PropertyHomeSearchChangerState());
-  }
-
-  @override
-  Future<void> close() {
-    _timer?.cancel();
-    return super.close();
-  }
-
-  //***********************************for add ads*******************************
 }

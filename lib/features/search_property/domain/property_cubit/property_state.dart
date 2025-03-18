@@ -4,5 +4,3 @@ part of 'property_cubit.dart';
 sealed class PropertyState {}
 
 final class PropertyInitial extends PropertyState {}
-
-final class PropertyHomeSearchChangerState extends PropertyState {}

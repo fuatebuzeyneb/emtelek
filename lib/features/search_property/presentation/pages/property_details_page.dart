@@ -8,7 +8,7 @@ import 'package:emtelek/generated/l10n.dart';
 import 'package:emtelek/core/utils/page_transitions.dart';
 import 'package:emtelek/shared/cubits/ad_details_cubit/ad_details_cubit.dart';
 import 'package:emtelek/shared/cubits/settings_cubit/settings_cubit.dart';
-import 'package:emtelek/shared/models/add-ads-models/ad_model.dart';
+import 'package:emtelek/shared/models/add-ads-models/add_ad_model.dart';
 import 'package:emtelek/shared/services/cache_hekper.dart';
 import 'package:emtelek/shared/services/service_locator.dart';
 import 'package:emtelek/core/constants/app_colors.dart';

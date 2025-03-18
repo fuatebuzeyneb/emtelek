@@ -1,4 +1,4 @@
-import 'package:emtelek/shared/models/add-ads-models/ad_model.dart';
+import 'package:emtelek/shared/models/add-ads-models/add_ad_model.dart';
 
 class PropertyAdModel {
   AddAdModel adModel;
